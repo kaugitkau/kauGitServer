@@ -1,8 +1,7 @@
-package Repository;
+package com.example.Kau_Git.Repository;
 
-import Entity.User;
+import com.example.Kau_Git.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
 
 public interface UserRepository extends JpaRepository<User,Long> {
 }

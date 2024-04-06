@@ -1,8 +1,7 @@
-package Repository;
+package com.example.Kau_Git.Repository;
 
-import Entity.Comment;
+import com.example.Kau_Git.Entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
 
 public interface CommentRepository extends JpaRepository<Comment,Long> {
 }

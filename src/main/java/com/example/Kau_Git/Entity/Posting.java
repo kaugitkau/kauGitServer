@@ -1,4 +1,4 @@
-package Entity;
+package com.example.Kau_Git.Entity;
 
 import jakarta.persistence.*;
 import java.util.*;

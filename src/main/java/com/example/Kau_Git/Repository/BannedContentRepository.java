@@ -1,8 +1,7 @@
-package Repository;
+package com.example.Kau_Git.Repository;
 
-import Entity.BannedContent;
+import com.example.Kau_Git.Entity.BannedContent;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
 
 public interface BannedContentRepository extends JpaRepository<BannedContent,Long> {
 
