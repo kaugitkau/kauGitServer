@@ -1,8 +1,6 @@
-package com.example.Kau_Git.entity;
+package com.example.Kau_Git.Entity;
 
-import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "POSTING")
-public class Posting extends BaseEntity {
+public class Posting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +52,4 @@ public class Posting extends BaseEntity {
 
     @Column(name = "IS_HIDE", nullable = false)
     private boolean isHide = false;
-
 }
