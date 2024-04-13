@@ -1,8 +1,6 @@
-package com.example.Kau_Git.entity;
+package com.example.Kau_Git.Entity;
 
-import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "COMMENT")
-public class Comment extends BaseEntity {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +22,8 @@ public class Comment extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID", foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
     private Posting posting;
+
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "WRITER_ID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_COMMENT_WRITER_ID"))
@@ -46,5 +46,4 @@ public class Comment extends BaseEntity {
 
     @Column(name = "IS_HIDE_FLAG", nullable = false)
     private boolean isHideFlag = false;
-
 }

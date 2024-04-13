@@ -1,18 +1,34 @@
-package com.example.Kau_Git.entity;
-import com.example.Kau_Git.entity.common.BaseEntity;
-import jakarta.persistence.*;
+package com.example.Kau_Git.Entity;
 
-import java.util.*;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "USER")
-public class User extends BaseEntity {
+@NoArgsConstructor
+@Getter
+@Setter
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "USERID", nullable = false)
-    private Long userId;
+    @Getter
+    @Setter
+    private long userId;
 
+    private String id;
+
+    @Getter
+    @Setter
+    private String email;
+
+    @Getter
+    @Setter
     @Column(name = "NAME", length = 100)
     private String name;
 
@@ -24,6 +40,9 @@ public class User extends BaseEntity {
 
     @Column(name = "BIRTH_DATE")
     private Date birthDate;
+
+    @Column(length = 100)
+    private String password;
 
     @Column(name = "GENDER")
     private Integer gender;
@@ -49,5 +68,25 @@ public class User extends BaseEntity {
     @Column(name = "HAS_BANNED_FLAG", nullable = false)
     private Boolean hasBannedFlag = false;
 
+    @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결정합니다. (기본적은 int)
+    @Column(nullable = false)
+    private com.example.Kau_Git.Entity.MyRole role; // 사용자의 권한을 관리할 Enum 클래스
+
+    @Builder
+    public User(String id,String name, String email, com.example.Kau_Git.Entity.MyRole role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
+
+    public User update(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.role.getKey();
+    }
 
 }
