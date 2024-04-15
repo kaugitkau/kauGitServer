@@ -1,6 +1,6 @@
 package com.example.Kau_Git.Oauth;
 
-import com.example.Kau_Git.Entity.User;
+import com.example.Kau_Git.entity.User;
 import lombok.Getter;
 
 import java.io.Serializable;

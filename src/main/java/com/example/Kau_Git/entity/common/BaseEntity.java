@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Entity.common;
+package com.example.Kau_Git.entity.common;
 
 
 import jakarta.persistence.EntityListeners;

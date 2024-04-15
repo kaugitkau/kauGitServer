@@ -1,6 +1,6 @@
-package com.example.Kau_Git.Service;
+package com.example.Kau_Git.service;
 
-import com.example.Kau_Git.Entity.User;
+import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.Repository.UserRepository;
