@@ -1,5 +1,6 @@
 package com.example.Kau_Git.entity;
 
+import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User  {
+public class User  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USERID", nullable = false)

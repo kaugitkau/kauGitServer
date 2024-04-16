@@ -1,5 +1,6 @@
 package com.example.Kau_Git.entity;
 
+import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "BANNEDCONTENT")
-public class BannedContent {
+public class BannedContent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
