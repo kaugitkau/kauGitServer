@@ -3,7 +3,7 @@ package com.example.Kau_Git.service;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
-import com.example.Kau_Git.Repository.UserRepository;
+import com.example.Kau_Git.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

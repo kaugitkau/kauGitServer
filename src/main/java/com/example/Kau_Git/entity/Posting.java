@@ -2,17 +2,16 @@ package com.example.Kau_Git.entity;
 
 import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "POSTING")
+@Builder
+@AllArgsConstructor
 public class Posting extends BaseEntity {
 
     @Id
@@ -26,8 +25,8 @@ public class Posting extends BaseEntity {
     @Column(name = "POST_ORD")
     private Short postOrd;
 
-    @Column(name = "WRITE_DATE", nullable = false)
-    private LocalDateTime writeDate = LocalDateTime.now();
+//    @Column(name = "WRITE_DATE", nullable = false)
+//    private LocalDateTime writeDate = LocalDateTime.now();
 
     @Column(name = "CLASSIFICATION", length = 1)
     private char classification;
