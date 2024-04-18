@@ -24,8 +24,6 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID", foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
     private Posting posting;
 
-
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "WRITER_ID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_COMMENT_WRITER_ID"))
     private User writer;
