@@ -20,7 +20,7 @@ public class User  extends BaseEntity {
     @Column(name = "USERID", nullable = false)
     @Getter
     @Setter
-    private long userId;
+    private Long userId;
 
     private String id;
 
@@ -88,6 +88,10 @@ public class User  extends BaseEntity {
 
     public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public long getUserId(){
+        return userId;
     }
 
 }
