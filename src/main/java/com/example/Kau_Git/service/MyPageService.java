@@ -1,7 +1,7 @@
 package com.example.Kau_Git.Service;
 
-import com.example.Kau_Git.Entity.User;
-import com.example.Kau_Git.Repository.UserRepository;
+import com.example.Kau_Git.entity.User;
+import com.example.Kau_Git.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

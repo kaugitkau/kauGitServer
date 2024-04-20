@@ -1,11 +1,10 @@
 package com.example.Kau_Git.Oauth;
 
-import com.example.Kau_Git.Service.CustomOAuth2UserService;
+import com.example.Kau_Git.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.*;
 import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @EnableWebSecurity

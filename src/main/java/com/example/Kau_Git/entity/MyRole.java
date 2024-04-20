@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Entity;
+package com.example.Kau_Git.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

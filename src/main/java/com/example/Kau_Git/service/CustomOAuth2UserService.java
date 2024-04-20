@@ -1,9 +1,9 @@
-package com.example.Kau_Git.Service;
+package com.example.Kau_Git.service;
 
-import com.example.Kau_Git.Entity.User;
+import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
-import com.example.Kau_Git.Repository.UserRepository;
+import com.example.Kau_Git.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,7 +40,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         User user = saveOrUpdate(attributes);
         // User 클래스를 사용하지 않고 SessionUser클래스를 사용하는 이유는 오류 방지.
-        httpSession.setAttribute("user", new SessionUser(user)); // SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
+        httpSession.setAttribute("user", new SessionUser(user));// SessionUser : 세션에 사용자 정보를 저장하기 위한 Dto 클래스
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),

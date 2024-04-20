@@ -1,7 +1,7 @@
 package com.example.Kau_Git.Service;
 
-import com.example.Kau_Git.Entity.User;
-import com.example.Kau_Git.Repository.UserRepository;
+import com.example.Kau_Git.entity.User;
+import com.example.Kau_Git.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MyPageServiceTest {
 
     @Autowired
-    private MyPageService ms;
+    private com.example.Kau_Git.Service.MyPageService ms;
 
     @Autowired
     private UserRepository ur;
