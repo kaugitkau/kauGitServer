@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>내 정보</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<div class="container">
+    <h1>내 정보</h1>
+    <div th:if="${user}">
+        <p><strong>이름:</strong> <span th:text="${user.name}">이름</span></p>
+        <p><strong>이메일:</strong> <span th:text="${user.email}">이메일</span></p>
+        <p><strong>주소:</strong> <span th:text="${user.address}">주소</span></p>
+        <p><strong>국적:</strong> <span th:text="${user.nationality}">국적</span></p>
+        <p><strong>종교:</strong> <span th:text="${user.religion}">종교</span></p>
+        <p><strong>포인트:</strong><span th:text="${user.userPoint}">포인트</span></p>
+        <p><strong>성별:</strong> <span th:text="${user.gender == 0 ? '여성' : (user.gender == 1 ? '남성' : '기타')}">성별</span></p>
+
+        <form action="/MyInformation" method="post">
+            <!-- CSRF 토큰 값 포함 -->
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+            <input type="hidden" name="email" th:value="${user.email}"/>
+            <div>
+                <label for="address">주소:</label>
+                <input type="text" id="address" name="address" th:value="${user.address}"/>
+            </div>
+            <div>
+                <label for="nationality">국적:</label>
+                <input type="text" id="nationality" name="nationality" th:value="${user.nationality}"/>
+            </div>
+            <div>
+                <label for="religion">종교:</label>
+                <input type="text" id="religion" name="religion" th:value="${user.religion}"/>
+            </div>
+            <div>
+                <label for="gender">성별:</label>
+                <select id="gender" name="gender">
+                    <option value="0" th:selected="${user.gender == 0}">여성</option>
+                    <option value="1" th:selected="${user.gender == 1}">남성</option>
+                    <option value="2" th:selected="${user.gender != 0 && user.gender != 1}">기타</option>
+                </select>
+            </div>
+
+            <button type="submit">정보 업데이트</button>
+        </form>
+    </div>
+    <div th:if="${errorMessage}">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <a href="/">홈으로</a>
+</div>
+</body>
+</html>

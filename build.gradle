@@ -40,3 +40,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 	jvmArgs '-Xshare:off' // JVM 아규먼트 설정
 }
+
+compileJava {
+	options.compilerArgs += ['-parameters']
+}
