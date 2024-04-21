@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Table(name = "POSTING")
 @Builder
 @AllArgsConstructor
-@DynamicInsert
 public class Posting extends BaseEntity {
 
     @Id
@@ -46,12 +45,19 @@ public class Posting extends BaseEntity {
     @Column(name = "REPORT_CNT")
     private Short reportCnt;
 
-    @Column(name = "VIEW_CNT", columnDefinition = "0")
+
     private Integer viewCnt;
 
-    @Column(name = "RECOMMENT_CNT")
-    private Integer recommentCnt=0;
+    private Integer recommendedCnt=0;
 
     @Column(name = "IS_HIDE", nullable = false)
     private boolean isHide = false;
+
+    public void decrementRecommendedCnt(){
+        this.recommendedCnt-=1;
+    }
+
+    public void incrementRecommendedCnt(){
+        this.recommendedCnt+=1;
+    }
 }

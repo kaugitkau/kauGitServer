@@ -2,26 +2,24 @@ package com.example.Kau_Git.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@Table(name ="FILES")
+@NoArgsConstructor
 public class Files {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", length = 100)
-    private String id;
+    private Long id;
 
-    @Column(name = "FileUrl", length = 300)
     private String fileUrl;
 
-    @Column(name = "FileName", length = 100)
     private String filename;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
+    @JoinColumn(name = "posting_id")//엔티티이름_id여야함. post_id였었음.
     private Posting posting;
 }
