@@ -67,9 +67,16 @@ public class User  extends BaseEntity {
     @Column(name = "USER_POINT")
     private Integer userPoint;
 
+    private String region;
+
     @Column(name = "HAS_BANNED_FLAG", nullable = false)
     private Boolean hasBannedFlag = false;
 
+    private Double avgRated;
+
+    private String motto;//좌우명
+
+    private String language;
     @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결정합니다. (기본적은 int)
     @Column(nullable = false)
     private com.example.Kau_Git.entity.MyRole role; // 사용자의 권한을 관리할 Enum 클래스

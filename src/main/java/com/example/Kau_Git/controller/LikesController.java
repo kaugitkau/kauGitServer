@@ -14,12 +14,12 @@ public class LikesController {
 
     private final Long testId = 1L;
 
-    @PostMapping("/like/{postId}")
+    @PostMapping("/like/{postId}")               //좋아요
     public void checkLikeButton(@PathVariable Long postId) {
         likesCommandService.likePosting(testId, postId);
     }
 
-    @PostMapping("/cancel-like/{postId}")
+    @PostMapping("/cancel-like/{postId}")         //좋아요취소
     public void uncheckLikeButton(@PathVariable Long postId) {
         likesCommandService.cancelLike(testId, postId);
     }
