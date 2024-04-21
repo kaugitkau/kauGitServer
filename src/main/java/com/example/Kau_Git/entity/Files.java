@@ -12,9 +12,13 @@ public class Files {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", length = 100)
     private String id;
 
+    @Column(name = "FileUrl", length = 300)
     private String fileUrl;
+
+    @Column(name = "FileName", length = 100)
     private String filename;
 
     @ManyToOne(cascade = CascadeType.ALL)
