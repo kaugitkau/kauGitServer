@@ -1,6 +1,7 @@
 package com.example.Kau_Git.entity;
 
 import com.example.Kau_Git.entity.common.BaseEntity;
+
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

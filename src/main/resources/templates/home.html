@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Board Service</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/app.css">
@@ -9,7 +8,6 @@
 </head>
 <body>
 <div id="header" class="d-flex bd-highlight">
-    <a href="/" class="p-2 flex-grow-1 bd-highlight">Board Service</a>
     <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
         <input type="text" name="keyword" class="form-control" id="search" placeholder="검색">
         <button class="btn btn-success bi bi-search"></button>
@@ -17,17 +15,33 @@
 </div>
 <nav id="nav">
     <div class="text-right">
-        {{#user}}
-        <span class="mx-3">{{user}}님 안녕하세요!</span>
         <a href="/logout" class="btn btn-outline-dark">로그아웃</a>
         <a href="/modify" class="btn btn-outline-dark bi bi-gear"></a>
-        {{/user}}
-        {{^user}}
-        <a href="/oauth2/authorization/google" role="button" class="btn btn-outline-danger bi bi-google"> 로그인</a>
-        <a href="/auth/login" role="button" class="btn btn-outline-dark bi bi-lock-fill"> 로그인</a>
-        <a href="/auth/join" role="button" class="btn btn-outline-dark bi bi-person-circle"> 회원가입</a>
-        {{/user}}
+        <a href="/MyInformation" class="btn btn-outline-dark bi bi-person-circle"> 내 정보</a>
     </div>
 </nav>
+
+<!-- 축제 정보 섹션 시작 -->
+<div class="container mt-4">
+    <h2>축제 정보</h2>
+    <div class="row">
+        <!-- Thymeleaf를 사용하여 서버로부터 받은 축제 정보를 반복하여 표시 -->
+        <!-- 아래 코드는 Thymeleaf 예시이므로, 실제 서버 사이드 코드에 따라 수정 필요 -->
+        <div th:each="festival : ${festivals}" class="col-md-4 mb-3">
+            <div class="card">
+                <img th:src="${festival.firstimage}" class="card-img-top" alt="축제 이미지">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${festival.title}">축제 제목</h5>
+                    <p class="card-text" th:text="${festival.addr1}">축제 주소</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 축제 정보 섹션 끝 -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
