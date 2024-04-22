@@ -42,7 +42,7 @@ public class GuideQueryService {
         return build1;
     }
     public GuideResponseDto.ShowAllPostDto showAllPost(){
-        List<Posting> all = postingRepository.findAll();
+        List<Posting> all = postingRepository.findAllBYclassification('G');
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =
         all.stream()
                 .map(a-> GuideResponseDto.GuidePreviewDto.builder()
@@ -52,7 +52,7 @@ public class GuideQueryService {
                         .nickname(a.getWriter().getNickname())
                         .religion(a.getWriter().getReligion())
                         .build())
-                .collect(Collectors.toList());
+                .toList();
 
         GuideResponseDto.ShowAllPostDto showAllPostDtoBuilder = GuideResponseDto.ShowAllPostDto.builder()
                 .elemDtoList(guidePreviewDtoList)
