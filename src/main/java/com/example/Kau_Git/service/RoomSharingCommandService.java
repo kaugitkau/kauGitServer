@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RoomSharingCommandService {
+public class RoomSharingCommandService extends AbstractPostingService{
     private final PostingRepository postingRepository;
     private final UserRepository userRepository;
 

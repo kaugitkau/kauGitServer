@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CommentCommandService {
+public class CommentCommandService extends AbstractPostingService{
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final PostingRepository postingRepository;

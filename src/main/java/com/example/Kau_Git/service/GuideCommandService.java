@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GuideCommandService {
+public class GuideCommandService extends AbstractPostingService{
 
     private final PostingRepository postingRepository;
     private final GuideMatchingRepository guideMatchingRepository;
