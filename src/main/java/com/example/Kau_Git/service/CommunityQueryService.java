@@ -30,7 +30,7 @@ public class CommunityQueryService {
     }
 
     public CommunityResponseDto.ListDto showList(){
-        List<Posting> postings = postingRepository.findAllBYclassification('C');
+        List<Posting> postings = postingRepository.findAllByClassification('C');
         List<CommunityResponseDto.PreviewDto> collect = postings.stream()
                 .map(posting -> CommunityResponseDto.PreviewDto.builder()
                         .title(posting.getTitle())

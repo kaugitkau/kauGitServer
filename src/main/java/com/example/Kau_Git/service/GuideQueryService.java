@@ -42,7 +42,7 @@ public class GuideQueryService {
         return build1;
     }
     public GuideResponseDto.ShowAllPostDto showAllPost(){
-        List<Posting> all = postingRepository.findAllBYclassification('G');
+        List<Posting> all = postingRepository.findAllByClassification('G');
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =
         all.stream()
                 .map(a-> GuideResponseDto.GuidePreviewDto.builder()
