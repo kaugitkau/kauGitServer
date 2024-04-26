@@ -36,7 +36,7 @@ public class CommunityController {
         return communityQueryService.showPosting(postingId);
     }
 
-    @GetMapping("/roomShare/allpost")
+    @GetMapping("/community/allpost")
     public CommunityResponseDto.ListDto showAllPost() {
         return communityQueryService.showList();
     }

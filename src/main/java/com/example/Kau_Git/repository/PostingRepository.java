@@ -9,6 +9,8 @@ import java.util.List;
 public interface PostingRepository extends JpaRepository<Posting,Long> {
     Posting findByPostId(Long postId);
 
-    List<Posting> findAllBYclassification(char c);
+    List<Posting> findAllByClassification(char c);
+
+
 
 }
