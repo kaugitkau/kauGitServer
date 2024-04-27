@@ -1,5 +1,6 @@
 package com.example.Kau_Git.controller;
 
+import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
@@ -10,6 +11,9 @@ import com.example.Kau_Git.service.RoomSharingCommandService;
 import com.example.Kau_Git.service.RoomSharingQueryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,15 +43,17 @@ public class RoomSharingController {
     }
 
     @GetMapping("/roomShare/allpost")
-    public PostRoomSharingResponseDto.AllPostDto showAllPost() {
+    public PostRoomSharingResponseDto.AllPostDto showAllPost(@Login SessionUser sessionUser) {
+        System.out.println(sessionUser.getUserId());
         return roomSharingQueryService.showAllPosting();
     }
-
-//    @GetMapping("/roomShare/regist2")  //@Login 이방식으로 추후에 할계획임.
-//    public void addSharingPost2(@Login SessionUser sessionUser) {
+//
+//    @PostMapping("/roomShare/regist2")  //@Login 이방식으로 추후에 할계획임.
+//    public String addSharingPost2(@Login SessionUser sessionUser) {
 //        System.out.println(sessionUser.getUserId());
-////        Posting posting = roomSharingCommandService.registSharing(registPostDto);
-////        return posting.getPostId();
+//        Posting posting = roomSharingCommandService.registSharing(registPostDto);
+//        return posting.getPostId();
+//        return "good";
 //    }
 
 

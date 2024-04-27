@@ -23,4 +23,6 @@ public class LikesController {
     public void uncheckLikeButton(@PathVariable Long postId) {
         likesCommandService.cancelLike(testId, postId);
     }
+
+
 }

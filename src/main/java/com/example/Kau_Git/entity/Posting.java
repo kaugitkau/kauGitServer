@@ -6,6 +6,8 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -49,6 +51,15 @@ public class Posting extends BaseEntity {
     private Integer viewCnt;
 
     private Integer recommendedCnt=0;
+
+    @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL)
+    private List<Files> fileList = new ArrayList<>();
+
+    public void addFileList(Files files) {
+        fileList.add(files);
+        files.createPosting(this);
+
+    }
 
     @Column(name = "IS_HIDE", nullable = false)
     private boolean isHide = false;

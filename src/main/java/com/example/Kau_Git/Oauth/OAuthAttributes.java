@@ -25,18 +25,6 @@ public class OAuthAttributes { //사용자 정보 전달
     private String id;
 
 
-    public OAuthAttributes(String oauthId,Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture, MyRole mr) {
-        this.attributes = attributes;
-        this.nameAttributeKey = nameAttributeKey;
-        this.name = name;
-        this.email = email;
-        this.picture = picture;
-        this.role =mr;
-        this.id=oauthId;
-
-    }
-
-
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
         if("google".equals(registrationId)){
             return ofGoogle(userNameAttributeName, attributes);
