@@ -5,21 +5,14 @@ import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
 import com.example.Kau_Git.entity.Posting;
-import com.example.Kau_Git.entity.User;
-import com.example.Kau_Git.repository.UserRepository;
 import com.example.Kau_Git.service.RoomSharingCommandService;
 import com.example.Kau_Git.service.RoomSharingQueryService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-public class RoomSharingController {
+public class SharingController {
 
     private final RoomSharingCommandService roomSharingCommandService;
     private final RoomSharingQueryService roomSharingQueryService;

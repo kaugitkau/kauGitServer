@@ -3,7 +3,7 @@ package com.example.Kau_Git.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class FeedHashtag {
+public class PheedHashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEEDHASHTAG_ID")

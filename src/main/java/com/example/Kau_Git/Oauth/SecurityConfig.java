@@ -24,7 +24,7 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
                         .contentSecurityPolicy("script-src 'self'; frame-ancestors 'self';"))
                 */
                 .authorizeHttpRequests((author)->author
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
+                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/test" , "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .logout(logout -> logout

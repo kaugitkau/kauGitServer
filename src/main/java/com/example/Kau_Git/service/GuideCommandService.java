@@ -2,7 +2,7 @@ package com.example.Kau_Git.service;
 
 
 import com.example.Kau_Git.dto.guide.GuideRequestDto;
-import com.example.Kau_Git.entity.GuideMatching;
+import com.example.Kau_Git.entity.ApplicantRespondent;
 import com.example.Kau_Git.entity.GuideMatchingStatus;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
@@ -33,25 +33,25 @@ public class GuideCommandService extends AbstractPostingService{
 
     }
 
-    public void applyMatching(Long applicantId, Long guideId){
+    public void applyMatching(Long applicantId, Long respondentId){
         User applicant = userRepository.findByUserId(applicantId);
-        User guide = userRepository.findByUserId(guideId);
-        GuideMatching build = GuideMatching.builder()
+        User respondent = userRepository.findByUserId(respondentId);
+        ApplicantRespondent build = ApplicantRespondent.builder()
                 .applicant(applicant)
-                .guide(guide)
+                .respondent(respondent)
                 .status(GuideMatchingStatus.WAITING)
                 .build();
         guideMatchingRepository.save(build);
 
     }
     public void acceptMatching(Long guideMatchingId){
-        Optional<GuideMatching> byId = guideMatchingRepository.findById(guideMatchingId);//예외처리 필요
+        Optional<ApplicantRespondent> byId = guideMatchingRepository.findById(guideMatchingId);//예외처리 필요
         byId.get().changeStatus(GuideMatchingStatus.ACCEPTED);
 
     }
 
-    public List<GuideMatching> getMatchingList(Long guideId) {
+    public List<ApplicantRespondent> getMatchingList(Long guideId) {
         User guide = userRepository.findByUserId(guideId);
-        return guideMatchingRepository.findAllByGuide(guide);
+        return guideMatchingRepository.findAllByRespondent(guide);
     }
 }

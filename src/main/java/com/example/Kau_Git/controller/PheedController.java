@@ -1,6 +1,5 @@
 package com.example.Kau_Git.controller;
 
-import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
 import com.example.Kau_Git.dto.sns.SnsRequestDto;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.service.SnsCommandService;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class SnsController {
+public class PheedController {
 
     private final SnsCommandService snsCommandService;
 

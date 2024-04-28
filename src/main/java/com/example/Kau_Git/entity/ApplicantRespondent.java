@@ -14,20 +14,24 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuideMatching{
+public class ApplicantRespondent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GUIDEMATCHING_ID")
+    @Column(name = "APPLICANTRESPONDENT_ID")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "guide_id")
-    private User guide;
+    @JoinColumn(name = "APPLICANT_ID")
+    private User applicant;
 
     @ManyToOne
-    @JoinColumn(name = "applicant_id")
-    private User applicant;
+    @JoinColumn(name = "RESPONDENT_ID")
+    private User respondent;
+
+    private String reason;
+
+
 
     @Column(name = "status")
     private GuideMatchingStatus status;
