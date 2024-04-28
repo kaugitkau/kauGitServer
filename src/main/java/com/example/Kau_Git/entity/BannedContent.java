@@ -19,7 +19,7 @@ public class BannedContent extends BaseEntity {
     private Long bannedId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USERID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_BANNEDCONTENT_USER_ID"))
+    @JoinColumn(name = "USERID")
     private User user;
 
     @Column(name = "REASON", length = 1000)

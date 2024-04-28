@@ -3,9 +3,13 @@ package com.example.Kau_Git.Oauth;
 import com.example.Kau_Git.service.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+@Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig { // 시큐리티 환경 설정 클래스
@@ -15,15 +19,19 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 /*.headers(headers -> headers
                         .contentSecurityPolicy("script-src 'self'; frame-ancestors 'self';"))
                 */
-                .authorizeHttpRequests(authz -> authz
+                .authorizeHttpRequests((author)->author
                         .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
                         .requestMatchers("/api/v1/**").hasRole("USER")
                         .anyRequest().authenticated())
-                .logout(logout -> logout.logoutSuccessUrl("/"))
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // 로그아웃 처리 URL 명시적 설정 (선택적)
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
                         .defaultSuccessUrl("/", true));
@@ -31,6 +39,24 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
     }
 
 }
-
+//@Configuration
+//@EnableWebSecurity
+//@RequiredArgsConstructor
+//public class SecurityConfig {
+//    private final CustomOAuth2UserService customOAuth2UserService;
+//    @Bean
+//    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+//                        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+//                .oauth2Login(oauth2 -> oauth2
+//                        .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
+//                        .defaultSuccessUrl("/", true));
+//
+//        ;
+//        return http.build();
+//    }
+//}
 
 

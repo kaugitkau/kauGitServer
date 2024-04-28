@@ -19,14 +19,11 @@ public class Posting extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "POST_ID")
+    @Column(name = "POSTING_ID")
     private Long postId;
 
     @Column(name = "TYPE", length = 1)
     private char type;
-
-    @Column(name = "POST_ORD")
-    private Short postOrd;
 
     @Column(name = "TITLE", nullable = false)
     private String title;
@@ -38,11 +35,8 @@ public class Posting extends BaseEntity {
     private String content;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "WRITER_ID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_WRITER_ID"))
+    @JoinColumn(name = "USER_ID")
     private User writer;
-
-    @Column(name = "HASHTAG", length = 1000)
-    private String hashtag;
 
     @Column(name = "REPORT_CNT")
     private Short reportCnt;
