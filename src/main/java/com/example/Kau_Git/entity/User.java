@@ -18,9 +18,7 @@ import java.util.Date;
 public class User  extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USERID", nullable = false)
-    @Getter
-    @Setter
+    @Column(name = "USER_ID", nullable = false)
     private Long userId;
 
     private String id;

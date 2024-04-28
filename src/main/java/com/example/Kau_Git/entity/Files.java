@@ -12,6 +12,7 @@ public class Files {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "FILES_ID")
     private Long id;
 
     private String fileUrl;

@@ -20,11 +20,11 @@ public class Comment extends BaseEntity {
     private Long commentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID", foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
+    @JoinColumn(name = "POSTING_ID")
     private Posting posting;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "WRITER_ID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_COMMENT_WRITER_ID"))
+    @JoinColumn(name = "USER_ID")
     private User writer;
 
     private Integer ord;

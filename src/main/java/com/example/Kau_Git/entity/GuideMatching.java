@@ -18,6 +18,7 @@ public class GuideMatching{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "GUIDEMATCHING_ID")
     private Long id;
 
     @ManyToOne

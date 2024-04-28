@@ -29,7 +29,6 @@ public class SnsCommandService {
 
         Posting posting = Posting.builder()
                 .writer(user)
-                .hashtag(makePostingDto.getHashtag())
                 .content(makePostingDto.getThreeLine())
                 .build();
 
