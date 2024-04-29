@@ -41,21 +41,4 @@ public class MentoringController {
     }
 
 
-    @PostMapping("guide/match/{applicantId}/{guideId}")  //가이드가 작성한 글을 보고 멘티가 신청
-    public void applyMatching(@PathVariable Long applicantId, @PathVariable Long guideId) {
-
-        guideCommandService.applyMatching(applicantId, guideId);
-    }
-
-    @PostMapping("guide/acceptMatch/{matchingId}")  //목록에서 하나 골라서 매칭 수락
-    public void acceptMatching(Long matchingId) {
-        guideCommandService.acceptMatching(matchingId);
-
-    }
-
-    @GetMapping("guide/all-match")               //신청목록 전체 반환
-    public List<ApplicantRespondent> getMatches(@PathVariable Long guideId) {
-        List<ApplicantRespondent> matchingList = guideCommandService.getMatchingList(guideId);
-        return matchingList;
-    }
 }

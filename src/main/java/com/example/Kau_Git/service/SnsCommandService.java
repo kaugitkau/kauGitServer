@@ -1,18 +1,15 @@
 package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.dto.GetS3Res;
-import com.example.Kau_Git.dto.sns.SnsRequestDto;
+import com.example.Kau_Git.dto.pheed.PheedRequestDto;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
-import com.nimbusds.oauth2.sdk.GeneralException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -23,13 +20,14 @@ public class SnsCommandService {
     private final S3Service s3Service;
     private final FilesService filesService;
 
-    public Posting createPosting(SnsRequestDto.MakePostingDto makePostingDto, List<MultipartFile> multipartFiles, Long writerId){
+    public Posting createPosting(PheedRequestDto.MakePostingDto makePostingDto, List<MultipartFile> multipartFiles, Long writerId){
 
         User user = userRepository.findByUserId(writerId);
 
         Posting posting = Posting.builder()
                 .writer(user)
-                .content(makePostingDto.getThreeLine())
+                .content(makePostingDto.getContent())
+                .classification('P')
                 .build();
 
         save(posting);

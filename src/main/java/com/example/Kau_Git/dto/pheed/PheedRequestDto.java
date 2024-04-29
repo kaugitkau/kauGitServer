@@ -1,12 +1,12 @@
-package com.example.Kau_Git.dto.sns;
+package com.example.Kau_Git.dto.pheed;
 
 import lombok.Getter;
 
-public class SnsRequestDto {
+public class PheedRequestDto {
 
     @Getter
     public static class MakePostingDto{
-        private String threeLine;
+        private String content;
         private String hashtag;
     }
 }
