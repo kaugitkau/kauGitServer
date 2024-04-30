@@ -1,17 +1,78 @@
 package com.example.Kau_Git.Service;
 
+import com.example.Kau_Git.dto.MyPageDto;
+import com.example.Kau_Git.dto.pheed.PheedResponseDto;
+import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
+import com.example.Kau_Git.repository.CommentRepository;
+import com.example.Kau_Git.repository.PheedHashtagRepository;
+import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
+import com.example.Kau_Git.service.PheedQueryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져오기
     @Autowired
     UserRepository ur;
+
+    private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final PostingRepository postingRepository;
+    private final PheedHashtagRepository pheedHashtagRepository;
+    private final PheedQueryService pheedQueryService;
+    public MyPageDto.MyPageMyInfo getMyInfo(Long userId){
+        User me = userRepository.findByUserId(userId);
+        Integer commentNum = commentRepository.countByWriter_UserId(userId);
+        Integer communityNum = postingRepository.countByWriter_UserId(userId);
+        Integer recommendedNum = postingRepository.sumRecommendedCntByUserId(userId);
+
+        return MyPageDto.MyPageMyInfo.builder()
+                .name(me.getName())
+                .introduction(me.getIntroduction())
+                .mentorScore(me.getMentoringAvgRated())
+                .sharingScore(me.getSharingAvgRated())
+                .numComment(commentNum)
+                .numCommunity(communityNum)
+                .numRecommended(recommendedNum)
+                .build();
+    }
+
+
+
+    public MyPageDto.ListPheedDto getPheeds(Long myId) {
+        List<Posting> pheeds = postingRepository.findAllByWriter_UserIdAndClassification(myId, 'P');
+        List<MyPageDto.PheedDto> pheedDtoList = pheeds.stream()
+                .map(this::convertToPheed)
+                .collect(Collectors.toList());
+
+        return MyPageDto.ListPheedDto.builder()
+                .pheedDtoList(pheedDtoList)
+                .build();
+    }
+    private MyPageDto.PheedDto convertToPheed(Posting pheed) {
+        String content = pheed.getContent();
+
+        // 만약 content의 길이가 20자 이상이라면 처음부터 20자까지를, 그렇지 않다면 content 전체를 사용
+        String description = content.length() > 20 ? content.substring(0, 20) : content;
+
+        List<String> fileUrls = pheedQueryService.extractFileUrls(pheed);
+        List<String> hashtags = pheedQueryService.extractHashtags(pheed);
+        return MyPageDto.PheedDto.builder()
+                .postingId(pheed.getPostingId())
+                .description(description)
+                .fileUrls(fileUrls)
+                .hashtags(hashtags)
+                .build();
+    }
 
 
 
@@ -56,6 +117,7 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
 
 
     }
+
 
     
 }

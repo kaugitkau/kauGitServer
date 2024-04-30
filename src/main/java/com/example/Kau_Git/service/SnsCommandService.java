@@ -2,8 +2,12 @@ package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.dto.GetS3Res;
 import com.example.Kau_Git.dto.pheed.PheedRequestDto;
+import com.example.Kau_Git.entity.Hashtag;
+import com.example.Kau_Git.entity.PheedHashtag;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
+import com.example.Kau_Git.repository.HashtagRepository;
+import com.example.Kau_Git.repository.PheedHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SnsCommandService {
     private final PostingRepository postingRepository;
+    private final PheedHashtagRepository pheedHashtagRepository;
+    private final HashtagRepository hashtagRepository;
     private final UserRepository userRepository;
     private final S3Service s3Service;
     private final FilesService filesService;
@@ -30,11 +36,15 @@ public class SnsCommandService {
                 .classification('P')
                 .build();
 
+
+
         save(posting);
         if (multipartFiles != null) {
             List<GetS3Res> imgUrls = uploadFilesToS3(multipartFiles);
             saveActivityFiles(imgUrls, posting);
         }
+        List<String> hashtags = makePostingDto.getHashtags();
+        saveHashtag(posting, hashtags);
 
         return posting;
     }
@@ -50,5 +60,19 @@ public class SnsCommandService {
     private void saveActivityFiles(List<GetS3Res> imgUrls, Posting posting) {
         // ActivityFile 저장 로직 구현
         filesService.saveAllActivityFileByActivity(imgUrls, posting);
+    }
+
+    private void saveHashtag(Posting posting, List<String> hashtags) {
+        hashtags.stream()
+                .forEach(tag -> {
+                    Hashtag hashtag = Hashtag.builder()
+                            .word(tag)
+                            .build();
+                    hashtagRepository.save(hashtag);
+
+                    PheedHashtag pheedHashtag = new PheedHashtag(posting, hashtag);
+                    pheedHashtagRepository.save(pheedHashtag);
+                });
+
     }
 }

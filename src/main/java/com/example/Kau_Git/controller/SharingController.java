@@ -22,7 +22,7 @@ public class SharingController {
                                @Login SessionUser sessionUser) {//이건 일단 남겨놓음.
         Long userId = sessionUser.getUserId();
         Posting posting = roomSharingCommandService.registSharing(registPostDto, userId);
-        return posting.getPostId();
+        return posting.getPostingId();
     }
 
     @GetMapping("/roomShare/{postingId}")//오류발생: name과 변수명이 동일한 경우에는 생략 가능하지 않나? -> 일단 아닌걸로 하자.

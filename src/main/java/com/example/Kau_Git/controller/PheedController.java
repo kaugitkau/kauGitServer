@@ -22,17 +22,18 @@ public class PheedController {
     private final PheedQueryService pheedQueryService;
 
     @PostMapping("/pheed/regist")
-    public Long addSnsPost(@RequestBody PheedRequestDto.MakePostingDto makePostingDto,
+    public Long addPheed(@RequestPart(value = "pheedDto") PheedRequestDto.MakePostingDto makePostingDto,
                            @RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
                            @Login SessionUser sessionUser) {
-//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //이건 일단 남겨놓음.
+
         Long userId = sessionUser.getUserId();
         Posting posting = snsCommandService.createPosting(makePostingDto, multipartFiles, userId);
-        return posting.getPostId();
+        return posting.getPostingId();
     }
 
     @GetMapping("/pheed")
     public PheedResponseDto.ListPheedDto getPheeds() {
+
         return pheedQueryService.getPheeds();
 
     }

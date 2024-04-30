@@ -67,10 +67,14 @@ public class User  extends BaseEntity {
 
     private String region;
 
+    private String introduction;//한줄소개
+
     @Column(name = "HAS_BANNED_FLAG", nullable = false)
     private Boolean hasBannedFlag = false;
 
-    private Double avgRated;
+    private Double mentoringAvgRated;
+
+    private Double sharingAvgRated;
 
     private String motto;//좌우명
 

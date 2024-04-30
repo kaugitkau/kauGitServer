@@ -21,7 +21,7 @@ public class GuideQueryService {
     private final PostingRepository postingRepository;
 
     public GuideResponseDto.ShowPostingDto showPost(Long postId) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         User user = byPostId.getWriter();
         PostingProfileDto build = PostingProfileDto.builder()
                 .nickname(user.getNickname())
@@ -30,7 +30,7 @@ public class GuideQueryService {
                 .motto(user.getMotto())
                 .language(user.getLanguage())
                 .photo(user.getProfileImage())
-                .avgRated(user.getAvgRated())
+                .avgRated(user.getMentoringAvgRated())
                 .build();
         GuideResponseDto.ShowPostingDto build1 = GuideResponseDto.ShowPostingDto.builder()
                 .title(byPostId.getTitle())
@@ -46,7 +46,7 @@ public class GuideQueryService {
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =
         all.stream()
                 .map(a-> GuideResponseDto.GuidePreviewDto.builder()
-                        .postingId(a.getPostId())
+                        .postingId(a.getPostingId())
                         .language(a.getWriter().getLanguage())
                         .region(a.getWriter().getRegion())
                         .nickname(a.getWriter().getNickname())

@@ -20,7 +20,7 @@ public class Posting extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POSTING_ID")
-    private Long postId;
+    private Long postingId;
 
     @Column(name = "TYPE", length = 1)
     private char type;

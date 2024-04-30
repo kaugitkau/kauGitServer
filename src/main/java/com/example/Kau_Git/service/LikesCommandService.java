@@ -24,7 +24,7 @@ public class LikesCommandService {
 
 
     public void likePosting(Long userID, Long postId) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         User byUserId = userRepository.findByUserId(userID);
         Likes build = Likes.builder()
                 .user(byUserId)
@@ -41,7 +41,7 @@ public class LikesCommandService {
         // 사용자 ID와 게시글 ID를 기반으로 좋아요 객체를 조회합니다.
 
         User byUserId = userRepository.findByUserId(userID);
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         Likes like = likesRepository.findByuserAndPosting(byUserId, byPostId);
 
         // 해당 좋아요 객체가 존재한다면, 데이터베이스에서 삭제합니다.
