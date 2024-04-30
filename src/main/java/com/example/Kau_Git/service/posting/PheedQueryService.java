@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.pheed.PheedResponseDto;
 import com.example.Kau_Git.entity.Files;

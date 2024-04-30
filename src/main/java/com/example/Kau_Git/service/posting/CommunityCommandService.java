@@ -1,14 +1,15 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.community.CommunityRequestDto;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.repository.PostingRepository;
+import com.example.Kau_Git.service.AbstractPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CommunityCommandService extends AbstractPostingService{
+public class CommunityCommandService extends AbstractPostingService {
     private final PostingRepository postingRepository;
 
     public void addPosting(Long userId, CommunityRequestDto.AddPostingDto addPostingDto) {

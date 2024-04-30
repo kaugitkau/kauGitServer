@@ -1,16 +1,13 @@
-package com.example.Kau_Git.controller;
+package com.example.Kau_Git.controller.posting;
 
 import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.guide.GuideRequestDto;
 import com.example.Kau_Git.dto.guide.GuideResponseDto;
-import com.example.Kau_Git.entity.ApplicantRespondent;
-import com.example.Kau_Git.service.GuideCommandService;
-import com.example.Kau_Git.service.GuideQueryService;
+import com.example.Kau_Git.service.posting.GuideCommandService;
+import com.example.Kau_Git.service.posting.GuideQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,11 +15,11 @@ public class MentoringController {
     private final GuideCommandService guideCommandService;
     private final GuideQueryService guideQueryService;
 
-    private final Long testId = 1L; //로컬 원시 변수에 final로 선언하면 한번 초기화된 변수는 변경할 수 없는 상수값이 된다.
 
     @PostMapping("/guide/regist")        //가이드가 모집글 작성
-    public void registGuidePosting(@RequestBody GuideRequestDto.RegistGuidePostingDto registGuidePostingDto) {
-        guideCommandService.registGuiding(registGuidePostingDto, testId);
+    public void registGuidePosting(@RequestBody GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, @Login SessionUser sessionUser) {
+        Long userId = sessionUser.getUserId();
+        guideCommandService.registGuiding(registGuidePostingDto, userId);
 //포인트 얼마 이상 아니면 exception발생하게 하자.
     }
 

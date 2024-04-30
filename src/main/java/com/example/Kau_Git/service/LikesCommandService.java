@@ -23,6 +23,15 @@ public class LikesCommandService {
     }
 
 
+    public void checkLikeStatus(Long userId, Long postingId) {
+        Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postingId);
+        if (like != null){
+            likePosting(userId, postingId);
+        }
+        else{
+            cancelLike(like);
+        }
+    }
     public void likePosting(Long userID, Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);
         User byUserId = userRepository.findByUserId(userID);
@@ -37,18 +46,13 @@ public class LikesCommandService {
 
     }
 
-    public void cancelLike(Long userID, Long postId) {
-        // 사용자 ID와 게시글 ID를 기반으로 좋아요 객체를 조회합니다.
+    public void cancelLike(Likes likes) {
 
-        User byUserId = userRepository.findByUserId(userID);
-        Posting byPostId = postingRepository.findByPostingId(postId);
-        Likes like = likesRepository.findByuserAndPosting(byUserId, byPostId);
+        Posting posting = likes.getPosting();
 
-        // 해당 좋아요 객체가 존재한다면, 데이터베이스에서 삭제합니다.
-        if (like != null) {
-            likesRepository.delete(like);
-        } else throw new EntityNotFoundException("Like not found.");
-        byPostId.decrementRecommendedCnt();
+        likesRepository.delete(likes);
+
+        posting.decrementRecommendedCnt();
     }
 
 

@@ -2,6 +2,7 @@ package com.example.Kau_Git.entity;
 
 import com.example.Kau_Git.entity.common.BaseEntity;
 
+import com.example.Kau_Git.entity.enums.MyRole;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -81,10 +82,10 @@ public class User  extends BaseEntity {
     private String language;
     @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결정합니다. (기본적은 int)
     @Column(nullable = false)
-    private com.example.Kau_Git.entity.MyRole role; // 사용자의 권한을 관리할 Enum 클래스
+    private MyRole role; // 사용자의 권한을 관리할 Enum 클래스
 
     @Builder
-    public User(String id,String name, String email, com.example.Kau_Git.entity.MyRole role) {
+    public User(String id,String name, String email, MyRole role) {
         this.id = id;
         this.name = name;
         this.email = email;

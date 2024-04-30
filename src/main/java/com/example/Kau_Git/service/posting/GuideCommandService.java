@@ -1,14 +1,15 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 
 import com.example.Kau_Git.dto.guide.GuideRequestDto;
 import com.example.Kau_Git.entity.ApplicantRespondent;
-import com.example.Kau_Git.entity.GuideMatchingStatus;
+import com.example.Kau_Git.entity.enums.GuideMatchingStatus;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.GuideMatchingRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
+import com.example.Kau_Git.service.AbstractPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GuideCommandService extends AbstractPostingService{
+public class GuideCommandService extends AbstractPostingService {
 
     private final PostingRepository postingRepository;
     private final GuideMatchingRepository guideMatchingRepository;

@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.PostingProfileDto;
 import com.example.Kau_Git.dto.guide.GuideRequestDto;
