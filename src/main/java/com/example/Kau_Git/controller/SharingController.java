@@ -17,15 +17,12 @@ public class SharingController {
     private final RoomSharingCommandService roomSharingCommandService;
     private final RoomSharingQueryService roomSharingQueryService;
 
-
-    private final Long testId = 1L;
-
-
     @PostMapping("/roomShare/regist")
-    public Long addSharingPost(@RequestBody PostRoomSharingRequestDto.RegistPostDto registPostDto) {
-//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //이건 일단 남겨놓음.
-        Posting posting = roomSharingCommandService.registSharing(registPostDto, testId);
-        return posting.getPostId();
+    public Long addSharingPost(@RequestBody PostRoomSharingRequestDto.RegistPostDto registPostDto,
+                               @Login SessionUser sessionUser) {//이건 일단 남겨놓음.
+        Long userId = sessionUser.getUserId();
+        Posting posting = roomSharingCommandService.registSharing(registPostDto, userId);
+        return posting.getPostingId();
     }
 
     @GetMapping("/roomShare/{postingId}")//오류발생: name과 변수명이 동일한 경우에는 생략 가능하지 않나? -> 일단 아닌걸로 하자.
@@ -40,14 +37,6 @@ public class SharingController {
         System.out.println(sessionUser.getUserId());
         return roomSharingQueryService.showAllPosting();
     }
-//
-//    @PostMapping("/roomShare/regist2")  //@Login 이방식으로 추후에 할계획임.
-//    public String addSharingPost2(@Login SessionUser sessionUser) {
-//        System.out.println(sessionUser.getUserId());
-//        Posting posting = roomSharingCommandService.registSharing(registPostDto);
-//        return posting.getPostId();
-//        return "good";
-//    }
 
 
 }
