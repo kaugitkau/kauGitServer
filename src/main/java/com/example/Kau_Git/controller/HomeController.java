@@ -1,26 +1,25 @@
 package com.example.Kau_Git.controller;
 
 import com.example.Kau_Git.Oauth.Login;
-import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.service.GetFestivalService;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class HomeController {
 
     private final GetFestivalService gs;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(@RequestParam("provider") String provider, Model model) {
         // provider에 따라 네이버 또는 구글 로그인 페이지로 리다이렉트
         String redirectUrl = "redirect:/";
@@ -32,15 +31,19 @@ public class HomeController {
         return redirectUrl;
     }
 
+
     @GetMapping("/")
-    public String home(@Login SessionUser user, Model model) {
+    public ResponseEntity<?> home(@Login SessionUser user) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            List<JSONObject> festivals = gs.getFestival();
+            return ResponseEntity.ok().body(festivals);
+        } else {
+            return ResponseEntity.noContent().build();
         }
+    }
 
-        List<JSONObject> festivals = gs.getFestival();
-        model.addAttribute("festivals",festivals);
-
-        return "home";
+    @GetMapping("/logout")
+    public ResponseEntity<Void> logout() {
+        return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).header("Location", "/").build();
     }
 }
