@@ -1,12 +1,12 @@
-package com.example.Kau_Git.controller;
+package com.example.Kau_Git.controller.posting;
 
 import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
 import com.example.Kau_Git.entity.Posting;
-import com.example.Kau_Git.service.RoomSharingCommandService;
-import com.example.Kau_Git.service.RoomSharingQueryService;
+import com.example.Kau_Git.service.posting.RoomSharingCommandService;
+import com.example.Kau_Git.service.posting.RoomSharingQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

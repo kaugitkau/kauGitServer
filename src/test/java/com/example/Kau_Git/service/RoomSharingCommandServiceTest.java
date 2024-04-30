@@ -4,6 +4,7 @@ import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
 
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.repository.PostingRepository;
+import com.example.Kau_Git.service.posting.RoomSharingCommandService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

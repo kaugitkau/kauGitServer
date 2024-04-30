@@ -1,6 +1,6 @@
 package com.example.Kau_Git.controller;
 
-import com.example.Kau_Git.service.GuideCommandService;
+import com.example.Kau_Git.service.posting.GuideCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

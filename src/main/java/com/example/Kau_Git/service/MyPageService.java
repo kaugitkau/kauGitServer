@@ -1,14 +1,13 @@
 package com.example.Kau_Git.Service;
 
 import com.example.Kau_Git.dto.MyPageDto;
-import com.example.Kau_Git.dto.pheed.PheedResponseDto;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.CommentRepository;
 import com.example.Kau_Git.repository.PheedHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
-import com.example.Kau_Git.service.PheedQueryService;
+import com.example.Kau_Git.service.posting.PheedQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

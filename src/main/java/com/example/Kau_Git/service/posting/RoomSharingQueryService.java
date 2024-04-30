@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
 import com.example.Kau_Git.entity.Posting;

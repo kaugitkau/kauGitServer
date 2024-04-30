@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.GetS3Res;
 import com.example.Kau_Git.dto.pheed.PheedRequestDto;
@@ -10,6 +10,8 @@ import com.example.Kau_Git.repository.HashtagRepository;
 import com.example.Kau_Git.repository.PheedHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
+import com.example.Kau_Git.service.FilesService;
+import com.example.Kau_Git.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +20,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SnsCommandService {
+public class PheedCommandService {
     private final PostingRepository postingRepository;
     private final PheedHashtagRepository pheedHashtagRepository;
     private final HashtagRepository hashtagRepository;

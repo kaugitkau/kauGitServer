@@ -5,7 +5,7 @@ import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.MyPageDto;
 import com.example.Kau_Git.entity.ApplicantRespondent;
 import com.example.Kau_Git.service.DeleteService;
-import com.example.Kau_Git.service.GuideCommandService;
+import com.example.Kau_Git.service.posting.GuideCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.example.Kau_Git.Service.MyPageService;

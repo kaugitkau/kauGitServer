@@ -1,5 +1,6 @@
 package com.example.Kau_Git.entity;
 
+import com.example.Kau_Git.entity.enums.GuideMatchingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
