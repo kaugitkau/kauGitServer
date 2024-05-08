@@ -24,7 +24,7 @@ public class RoomSharingQueryService {
                 .content(byPostId.getContent())
                 .writer(byPostId.getWriter().getNickname())
                 .viewCnt(byPostId.getViewCnt())
-                .recommendedCnt(byPostId.getRecommentCnt())
+                .recommendedCnt(byPostId.getRecommendedCnt())
                 .build();
         //오류발생: Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
         //해결법: dto에 getter를 넣어야한다!

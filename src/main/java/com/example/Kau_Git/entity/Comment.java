@@ -2,17 +2,16 @@ package com.example.Kau_Git.entity;
 
 import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "COMMENT")
+@Builder
+@AllArgsConstructor
 public class Comment extends BaseEntity {
 
     @Id
@@ -21,21 +20,14 @@ public class Comment extends BaseEntity {
     private Long commentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "POST_ID", referencedColumnName = "POST_ID", foreignKey = @ForeignKey(name = "FK_COMMENT_POST_ID"))
+    @JoinColumn(name = "POSTING_ID")
     private Posting posting;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "WRITER_ID", referencedColumnName = "USERID", foreignKey = @ForeignKey(name = "FK_COMMENT_WRITER_ID"))
+    @JoinColumn(name = "USER_ID")
     private User writer;
 
-    @Column(name = "WRITE_DATE", nullable = false)
-    private LocalDateTime writeDate = LocalDateTime.now();
-
-    @Column(name = "ORD")
-    private Short ord;
-
-    @Column(name = "GROUP_ORD")
-    private Short groupOrd;
+    private Integer ord;
 
     @Column(name = "CONTENT", length = 300)
     private String content;

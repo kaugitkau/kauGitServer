@@ -30,9 +30,16 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	testAnnotationProcessor 'org.projectlombok:lombok' // 테스트를 위한 세팅 @Slf4j
+	testAnnotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.projectlombok:lombok'
-	//출처: https://choihjhj.tistory.com/entry/springboot-JUnit-테스트에서-Slf4j-사용하기 [개발 블로그:티스토리]
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+	//s3
+	implementation('com.amazonaws:aws-java-sdk-s3:1.12.268')//s3
+	// swagger
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
 
 }
 

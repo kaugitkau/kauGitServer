@@ -1,15 +1,15 @@
 package com.example.Kau_Git.repository;
+
+import com.example.Kau_Git.entity.Likes;
 import com.example.Kau_Git.entity.Posting;
+import com.example.Kau_Git.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PostingRepository extends JpaRepository<Posting,Long> {
-    Posting findByPostId(Long postId);
+public interface LikesRepository extends JpaRepository<Likes, Long> {
 
-    List<Posting> findAllByClassification(char c);
+    Likes findByuserAndPosting(User user, Posting posting);
 
 
 

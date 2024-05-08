@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RoomSharingCommandService {
+public class RoomSharingCommandService extends AbstractPostingService{
     private final PostingRepository postingRepository;
     private final UserRepository userRepository;
 
@@ -18,13 +18,13 @@ public class RoomSharingCommandService {
         postingRepository.save(post);
     }
 
-    final
     public Posting registSharing(PostRoomSharingRequestDto.RegistPostDto registPost, Long userId){
         User user = userRepository.findByUserId(userId);
         Posting posting = Posting.builder()
                 .title(registPost.getTitle())
                 .content(registPost.getContent())
                 .writer(user)
+                .classification('S')
                 .build();
         save(posting);
 
