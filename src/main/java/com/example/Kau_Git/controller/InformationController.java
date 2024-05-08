@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Controller;
+package com.example.Kau_Git.controller;
 
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.Oauth.Login;
