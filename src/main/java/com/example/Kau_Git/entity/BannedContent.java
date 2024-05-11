@@ -15,8 +15,8 @@ public class BannedContent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "BANNED_ID")
-    private Long bannedId;
+    @Column(name = "BANNEDCONTENT_ID")
+    private Long bannedContentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USERID")

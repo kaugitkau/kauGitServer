@@ -2,6 +2,7 @@ package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.community.CommunityRequestDto;
 import com.example.Kau_Git.entity.Posting;
+import com.example.Kau_Git.repository.CommentRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.service.AbstractPostingService;
 import lombok.RequiredArgsConstructor;

@@ -27,9 +27,10 @@ public class FilesService {
             Files newFile = Files.builder()
                     .fileUrl(getS3Res.getFileUrl())
                     .fileName(getS3Res.getFileName())
+                    .posting(posting)
                     .build();
             files.add(newFile);
-            posting.addFileList(newFile);
+            posting.addToFileList(newFile);
         }
         saveActivityFile(files);
 

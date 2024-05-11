@@ -20,7 +20,7 @@ public class PheedController {
     private final PheedCommandService snsCommandService;
     private final PheedQueryService pheedQueryService;
 
-    @PostMapping("/pheed/regist")
+    @PostMapping("/pheed")
     public Long addPheed(@RequestPart(value = "pheedDto") PheedRequestDto.MakePostingDto makePostingDto,
                            @RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
                            @Login SessionUser sessionUser) {

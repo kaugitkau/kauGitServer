@@ -17,7 +17,7 @@ public class SharingController {
     private final RoomSharingCommandService roomSharingCommandService;
     private final RoomSharingQueryService roomSharingQueryService;
 
-    @PostMapping("/roomShare/regist")
+    @PostMapping("/roomShare")
     public Long addSharingPost(@RequestBody PostRoomSharingRequestDto.RegistPostDto registPostDto,
                                @Login SessionUser sessionUser) {//이건 일단 남겨놓음.
         Long userId = sessionUser.getUserId();

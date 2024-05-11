@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,8 +35,10 @@ public class PheedCommandService {
 
         Posting posting = Posting.builder()
                 .writer(user)
+                .title(makePostingDto.getContent())
                 .content(makePostingDto.getContent())
                 .classification('P')
+                .fileList(new ArrayList<>())
                 .build();
 
 
@@ -46,7 +49,7 @@ public class PheedCommandService {
             saveActivityFiles(imgUrls, posting);
         }
         List<String> hashtags = makePostingDto.getHashtags();
-        saveHashtag(posting, hashtags);
+        if (hashtags!=null) saveHashtag(posting, hashtags);
 
         return posting;
     }
@@ -70,9 +73,9 @@ public class PheedCommandService {
                     Hashtag hashtag = Hashtag.builder()
                             .word(tag)
                             .build();
-                    hashtagRepository.save(hashtag);
+                    Hashtag save = hashtagRepository.save(hashtag);
 
-                    PheedHashtag pheedHashtag = new PheedHashtag(posting, hashtag);
+                    PheedHashtag pheedHashtag = new PheedHashtag(posting, save);
                     pheedHashtagRepository.save(pheedHashtag);
                 });
 

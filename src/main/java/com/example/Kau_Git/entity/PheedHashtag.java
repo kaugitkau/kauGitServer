@@ -14,6 +14,8 @@ public class PheedHashtag {
     private Long id;
 
     public PheedHashtag(Posting posting, Hashtag hashtag) {
+        this.hashtag = hashtag;
+        this.posting = posting;
 
     }
 

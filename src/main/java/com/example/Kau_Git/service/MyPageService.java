@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Service;
+package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.dto.MyPageDto;
 import com.example.Kau_Git.entity.Posting;
@@ -20,13 +20,12 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져오기
-    @Autowired
-    UserRepository ur;
+//    @Autowired
+//    UserRepository ur;
 
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final PostingRepository postingRepository;
-    private final PheedHashtagRepository pheedHashtagRepository;
     private final PheedQueryService pheedQueryService;
     public MyPageDto.MyPageMyInfo getMyInfo(Long userId){
         User me = userRepository.findByUserId(userId);
@@ -36,6 +35,7 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
 
         return MyPageDto.MyPageMyInfo.builder()
                 .name(me.getName())
+                .userPoint(me.getUserPoint())
                 .introduction(me.getIntroduction())
                 .mentorScore(me.getMentoringAvgRated())
                 .sharingScore(me.getSharingAvgRated())
@@ -78,7 +78,7 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
     @Transactional
     public User GetInformation(String email, String name){  // pk기반으로 찾아오고, email과 name을 표시한다.
         //이메일 기반 으로 사용자 찾기
-        Optional<User> u1 =ur.findByEmail(email); //Optional -> null값일 수 도 있기때문에 감아놓는다.
+        Optional<User> u1 =userRepository.findByEmail(email); //Optional -> null값일 수 도 있기때문에 감아놓는다.
 
 
         if(u1.isPresent()){
@@ -98,7 +98,7 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
 
     @Transactional
     public void SetInformation(String email, String address, String religion, String nationality, int gender){ //
-        Optional<User> u1 =ur.findByEmail(email);
+        Optional<User> u1 =userRepository.findByEmail(email);
 
         if(u1.isPresent()) {
 
@@ -111,7 +111,7 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
 
 
 
-            ur.save(s1);
+            userRepository.save(s1);
         }
 
 

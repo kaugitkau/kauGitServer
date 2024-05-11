@@ -1,5 +1,6 @@
 package com.example.Kau_Git.entity;
 
+import com.example.Kau_Git.entity.common.BaseEntity;
 import com.example.Kau_Git.entity.enums.GuideMatchingStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,12 +16,13 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplicantRespondent {
+public class ApplicantRespondent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "APPLICANTRESPONDENT_ID")
     private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "APPLICANT_ID")
@@ -32,14 +34,9 @@ public class ApplicantRespondent {
 
     private String reason;
 
-
-
     @Column(name = "status")
     private GuideMatchingStatus status;
 
-    @CreatedDate
-    @Column(name = "match_date")
-    private LocalDateTime matchDate;
 
     public void changeStatus(GuideMatchingStatus guideMatchingStatus) {
         status = guideMatchingStatus;

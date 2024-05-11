@@ -9,6 +9,7 @@ import java.util.List;
 
 public class MyPageDto {
     @Builder
+    @Getter
     public static class MyPageMyInfo {
         private String name;
         private String introduction;
