@@ -3,8 +3,9 @@ name: Deploy
   # 언제 이 파일의 내용이 실행될 것인지 정의합니다.
   # 여기서는 main 브랜치에 코드가 push 되거나 pull_request되었을 때 실행할 것을 말하고 있습니다.
 on:
+
   pull_request:
-    branches: [ "main" ]
+    branches: [ "release" ]
 
 # 코드의 내용을 이 파일을 실행하여 action을 수행하는 주체(Github Actions에서 사용하는 VM)가 읽을 수 있도록 허용합니다.
 permissions:
@@ -26,17 +27,24 @@ jobs:
           java-version: '17'
           distribution: "adopt"
 
-      - name: Set Yaml
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: ./src/main/resources/application-prod.yaml
-        env:
-          rds_endpoint: ${ secrets.RDS_ENDPOINT}
-          rds_username: ${ secrets.RDS_USERNAME}
-          rds_password: ${ secrets.RDS_PASSWORD}
-          s3_accessKey: ${secrets.S3_ACCESSKEY}
-          s3_secretKey: ${secrets.S3_SECRETKEY}
-          s3_bucketname: ${secrets.S3_BUCKETNAME}
+      - name: Make application.properties
+        run: |
+          cd ./src/main/resources
+          touch ./application-prod.properties
+          echo "${{ secrets.PROPERTIES }}" > ./application-prod.properties
+        shell: bash
+
+      #      - name: Set Yaml
+#        uses: microsoft/variable-substitution@v1
+#        with:
+#          files: ./src/main/resources/application-prod.yaml
+#        env:
+#          rds_endpoint: ${ secrets.RDS_ENDPOINT}
+#          rds_username: ${ secrets.RDS_USERNAME}
+#          rds_password: ${ secrets.RDS_PASSWORD}
+#          s3_accessKey: ${secrets.S3_ACCESSKEY}
+#          s3_secretKey: ${secrets.S3_SECRETKEY}
+#          s3_bucketname: ${secrets.S3_BUCKETNAME}
 
 
       # Github secrets로부터 데이터를 받아서, 워크 플로우에 파일을 생성
