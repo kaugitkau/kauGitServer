@@ -29,7 +29,9 @@ jobs:
 
       - name: Create oauth.properties file
         run: |
-          echo "${{ secrets.OAUTH_PROPERTIES }}" > ./src/main/resources/oauth.properties
+          cd ./src/main/resources
+          touch ./application-oauth.properties
+          echo "${{ secrets.OAUTH_PROPERTIES }}" > ./application-oauth.properties
 
       - name: Make application.properties
         run: |
