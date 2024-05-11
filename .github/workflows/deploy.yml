@@ -31,13 +31,13 @@ jobs:
         run: |
           cd ./src/main/resources
           touch ./application-prod.properties
-          echo "${{ secrets.PROPERTIES }}" > ./application-prod.properties
+          echo "${{ secrets.PROPERTIES }}" > ./application.properties
         shell: bash
 
       - name: Build with Gradle
-        run: |
-          chmod +x ./gradlew
-          ./gradlew clean build -x test
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: clean bootJar
 
         # docker image 빌드
       - name: docker image build
@@ -65,7 +65,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.KEY }}
           envs: GITHUB_SHA
-          script: |
+          script:
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/hanzoom-app
             docker-compose up -d
