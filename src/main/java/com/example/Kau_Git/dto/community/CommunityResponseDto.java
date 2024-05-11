@@ -31,7 +31,11 @@ public class CommunityResponseDto {
     @AllArgsConstructor
     public static class PreviewDto {
         private String title;
+        private String description;
+        private String region;
         private LocalDateTime createdAt;
+        private Integer commentCount;
+        private Integer recommendedCount;
 
     }
 

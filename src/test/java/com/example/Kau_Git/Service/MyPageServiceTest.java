@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Service;
+package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.UserRepository;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class MyPageServiceTest {
 
     @Autowired
-    private com.example.Kau_Git.Service.MyPageService ms;
+    private com.example.Kau_Git.service.MyPageService ms;
 
     @Autowired
     private UserRepository ur;

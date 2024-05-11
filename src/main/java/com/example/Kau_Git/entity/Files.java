@@ -19,7 +19,7 @@ public class Files {
 
     private String fileName;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch =FetchType.LAZY)
     @JoinColumn(name = "posting_id")//엔티티이름_id여야함. post_id였었음.
     private Posting posting;
 

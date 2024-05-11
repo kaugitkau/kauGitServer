@@ -8,7 +8,7 @@ import com.example.Kau_Git.service.DeleteService;
 import com.example.Kau_Git.service.posting.GuideCommandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.example.Kau_Git.Service.MyPageService;
+import com.example.Kau_Git.service.MyPageService;
 
 import java.util.List;
 

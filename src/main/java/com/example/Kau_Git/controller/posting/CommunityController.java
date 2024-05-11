@@ -17,7 +17,7 @@ public class CommunityController {
     private final Long testId = 1L;
 
 
-    @PostMapping("/community/regist")
+    @PostMapping("/community")
     public void addSharingPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto) {
 //        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //이건 일단 남겨놓음.
         communityCommandService.addPosting(testId, addPostingDto);

@@ -16,7 +16,7 @@ public class MentoringController {
     private final GuideQueryService guideQueryService;
 
 
-    @PostMapping("/guide/regist")        //가이드가 모집글 작성
+    @PostMapping("/guide")        //가이드가 모집글 작성
     public void registGuidePosting(@RequestBody GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, @Login SessionUser sessionUser) {
         Long userId = sessionUser.getUserId();
         guideCommandService.registGuiding(registGuidePostingDto, userId);

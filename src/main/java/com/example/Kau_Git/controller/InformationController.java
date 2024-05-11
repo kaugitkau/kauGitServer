@@ -2,7 +2,7 @@ package com.example.Kau_Git.controller;
 
 import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
-import com.example.Kau_Git.Service.MyPageService;
+import com.example.Kau_Git.service.MyPageService;
 import com.example.Kau_Git.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

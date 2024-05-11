@@ -64,9 +64,7 @@ public class User  extends BaseEntity {
     private String contactDetail;
 
     @Column(name = "USER_POINT")
-    private Integer userPoint;
-
-    private String region;
+    private Integer userPoint=0;
 
     private String introduction;//한줄소개
 
@@ -76,8 +74,6 @@ public class User  extends BaseEntity {
     private Double mentoringAvgRated;
 
     private Double sharingAvgRated;
-
-    private String motto;//좌우명
 
     private String language;
     @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결정합니다. (기본적은 int)
