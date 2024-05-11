@@ -7,4 +7,4 @@ FROM openjdk:17
 COPY build/libs/*.jar app.jar
 
 # 컨테이너가 시작될 때 실행될 명령어를 지정합니다.
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
