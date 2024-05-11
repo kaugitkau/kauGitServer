@@ -31,12 +31,12 @@ jobs:
         with:
           files: ./src/main/resources/application-prod.yaml
         env:
-          rds_endpoint: ${{ secrets.RDS_ENDPOINT}}
-          rds_username: ${{ secrets.RDS_USERNAME}}
-          rds_password: ${{ secrets.RDS_PASSWORD}}
-          s3_accessKey: ${{secrets.S3_ACCESSKEY}}
-          s3_secretKey: ${{secrets.S3_SECRETKEY}}
-          s3_bucketname: ${{secrets.S3_BUCKETNAME}}
+          rds_endpoint: ${ secrets.RDS_ENDPOINT}
+          rds_username: ${ secrets.RDS_USERNAME}
+          rds_password: ${ secrets.RDS_PASSWORD}
+          s3_accessKey: ${secrets.S3_ACCESSKEY}
+          s3_secretKey: ${secrets.S3_SECRETKEY}
+          s3_bucketname: ${secrets.S3_BUCKETNAME}
 
 
       # Github secrets로부터 데이터를 받아서, 워크 플로우에 파일을 생성
@@ -57,9 +57,9 @@ jobs:
       # 이 때 사용되는 ${{ secrets.DOCKER_REPO }}/directors-dev 가 위에서 만든 도커 repository 입니다.
       - name: Docker build & push to docker repo
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile -t ${{ secrets.DOCKER_REPO }}/directors-dev .
-          docker push ${{ secrets.DOCKER_REPO }}/directors-dev
+          docker login -u ${ secrets.DOCKER_USERNAME } -p ${ secrets.DOCKER_PASSWORD }
+          docker build -f Dockerfile -t ${ secrets.DOCKER_REPO }/directors-dev .
+          docker push ${ secrets.DOCKER_REPO }/directors-dev
 
       # appleboy/ssh-action@master 액션을 사용하여 지정한 서버에 ssh로 접속하고, script를 실행합니다.
       # script의 내용은 도커의 기존 프로세스들을 제거하고, docker repo로부터 방금 위에서 push한 내용을 pull 받아 실행하는 것입니다.
@@ -68,12 +68,12 @@ jobs:
         uses: appleboy/ssh-action@master
         id: deploy
         with:
-          host: ${{ secrets.HOST }}
+          host: ${ secrets.HOST }
           username: ubuntu
-          key: ${{ secrets.KEY }}
+          key: ${ secrets.KEY }
           envs: GITHUB_SHA
           script: |
             sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_REPO }}/directors-dev
+            sudo docker pull ${ secrets.DOCKER_REPO }/directors-dev
             docker-compose up -d
             docker image prune -f
