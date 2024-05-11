@@ -27,6 +27,10 @@ jobs:
           java-version: '17'
           distribution: "adopt"
 
+      - name: Create oauth.properties file
+        run: |
+          echo "${{ secrets.OAUTH_PROPERTIES }}" > ./src/main/resources/oauth.properties
+
       - name: Make application.properties
         run: |
           cd ./src/main/resources
