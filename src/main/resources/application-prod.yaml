@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: Kau_Git
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${rds_endpoint}:3306/KAU_GIT?useSSL=false&allowPublicKeyRetrieval=true
+    username: ${rds_username}
+    password: ${rds_password}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  profiles:
+    include: oauth
+  session:
+    store-type: jdbc
+
+server:
+  port: 8080
+  servlet:
+    context-path: /app
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# AWS S3 설정 정보
+cloud:
+  aws:
+    credentials:
+      accessKey: ${s3_accessKey}
+      secretKey: ${s3_secretKey}
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: ${s3_bucketname}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+# 기타 설정
+api:
+  key: LxBZTXsOh5we8K2L7qENNg6oc8OqCM1cW5XeVOPlFaoCewNXy49/uTPMtuLf+F8vO9Lu0yVGJ+PDVEllOd+jzg==
