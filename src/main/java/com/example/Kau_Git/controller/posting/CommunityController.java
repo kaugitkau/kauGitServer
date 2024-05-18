@@ -1,14 +1,9 @@
-package com.example.Kau_Git.controller;
+package com.example.Kau_Git.controller.posting;
 
 import com.example.Kau_Git.dto.community.CommunityRequestDto;
 import com.example.Kau_Git.dto.community.CommunityResponseDto;
-import com.example.Kau_Git.dto.roomSharing.PostRoomSharingRequestDto;
-import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
-import com.example.Kau_Git.entity.Posting;
-import com.example.Kau_Git.service.CommunityCommandService;
-import com.example.Kau_Git.service.CommunityQueryService;
-import com.example.Kau_Git.service.RoomSharingCommandService;
-import com.example.Kau_Git.service.RoomSharingQueryService;
+import com.example.Kau_Git.service.posting.CommunityCommandService;
+import com.example.Kau_Git.service.posting.CommunityQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +17,7 @@ public class CommunityController {
     private final Long testId = 1L;
 
 
-    @PostMapping("/community/regist")
+    @PostMapping("/community")
     public void addSharingPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto) {
 //        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //이건 일단 남겨놓음.
         communityCommandService.addPosting(testId, addPostingDto);

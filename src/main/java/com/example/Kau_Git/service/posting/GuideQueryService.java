@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.PostingProfileDto;
 import com.example.Kau_Git.dto.guide.GuideRequestDto;
@@ -21,16 +21,15 @@ public class GuideQueryService {
     private final PostingRepository postingRepository;
 
     public GuideResponseDto.ShowPostingDto showPost(Long postId) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         User user = byPostId.getWriter();
         PostingProfileDto build = PostingProfileDto.builder()
                 .nickname(user.getNickname())
-                .region(user.getRegion())
+                .region(user.getAddress())
                 .religion(user.getReligion())
-                .motto(user.getMotto())
                 .language(user.getLanguage())
                 .photo(user.getProfileImage())
-                .avgRated(user.getAvgRated())
+                .avgRated(user.getMentoringAvgRated())
                 .build();
         GuideResponseDto.ShowPostingDto build1 = GuideResponseDto.ShowPostingDto.builder()
                 .title(byPostId.getTitle())
@@ -46,9 +45,9 @@ public class GuideQueryService {
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =
         all.stream()
                 .map(a-> GuideResponseDto.GuidePreviewDto.builder()
-                        .postingId(a.getPostId())
+                        .postingId(a.getPostingId())
                         .language(a.getWriter().getLanguage())
-                        .region(a.getWriter().getRegion())
+                        .region(a.getWriter().getAddress())
                         .nickname(a.getWriter().getNickname())
                         .religion(a.getWriter().getReligion())
                         .build())

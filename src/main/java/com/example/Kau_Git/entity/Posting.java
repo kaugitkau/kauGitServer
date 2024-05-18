@@ -20,7 +20,7 @@ public class Posting extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POSTING_ID")
-    private Long postId;
+    private Long postingId;
 
     @Column(name = "TYPE", length = 1)
     private char type;
@@ -49,9 +49,8 @@ public class Posting extends BaseEntity {
     @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL)
     private List<Files> fileList = new ArrayList<>();
 
-    public void addFileList(Files files) {
-        fileList.add(files);
-        files.createPosting(this);
+    public void addToFileList(Files file) {
+        fileList.add(file);
 
     }
 

@@ -22,12 +22,12 @@ public class CommentCommandService extends AbstractPostingService{
     private final UserRepository userRepository;
     private final PostingRepository postingRepository;
 
-    public void addComment(Long postId, Long writerId, CommentRequestDto.AddCommentDto addCommentDto) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+    public void addComment(Long postingId, Long writerId, CommentRequestDto.AddCommentDto addCommentDto) {
+        Posting byPostingId = postingRepository.findByPostingId(postingId);
         User byUserId = userRepository.findByUserId(writerId);
         Comment build = Comment.builder()
                 .content(addCommentDto.getContent())
-                .posting(byPostId)
+                .posting(byPostingId)
                 .writer(byUserId)
                 .build();
         commentRepository.save(build);
@@ -35,7 +35,7 @@ public class CommentCommandService extends AbstractPostingService{
     }
 
     public List<CommentResponseDto.CommentPreviewDto> showComments(Long postId) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         List<CommentResponseDto.CommentPreviewDto> collect = commentRepository.findAllByPostingOrderByCreatedAtAsc(byPostId)
                 .stream()
                 .map(c -> CommentResponseDto.CommentPreviewDto.builder()

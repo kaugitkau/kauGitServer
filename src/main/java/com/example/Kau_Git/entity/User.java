@@ -2,6 +2,7 @@ package com.example.Kau_Git.entity;
 
 import com.example.Kau_Git.entity.common.BaseEntity;
 
+import com.example.Kau_Git.entity.enums.MyRole;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,24 +64,24 @@ public class User  extends BaseEntity {
     private String contactDetail;
 
     @Column(name = "USER_POINT")
-    private Integer userPoint;
+    private Integer userPoint=0;
 
-    private String region;
+    private String introduction;//한줄소개
 
     @Column(name = "HAS_BANNED_FLAG", nullable = false)
     private Boolean hasBannedFlag = false;
 
-    private Double avgRated;
+    private Double mentoringAvgRated;
 
-    private String motto;//좌우명
+    private Double sharingAvgRated;
 
     private String language;
     @Enumerated(EnumType.STRING) // Enum값을 어떤 형태로 저장할지 결정합니다. (기본적은 int)
     @Column(nullable = false)
-    private com.example.Kau_Git.entity.MyRole role; // 사용자의 권한을 관리할 Enum 클래스
+    private MyRole role; // 사용자의 권한을 관리할 Enum 클래스
 
     @Builder
-    public User(String id,String name, String email, com.example.Kau_Git.entity.MyRole role) {
+    public User(String id,String name, String email, MyRole role) {
         this.id = id;
         this.name = name;
         this.email = email;

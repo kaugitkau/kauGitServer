@@ -1,6 +1,6 @@
 package com.example.Kau_Git.Oauth;
 
-import com.example.Kau_Git.entity.MyRole;
+import com.example.Kau_Git.entity.enums.MyRole;
 import com.example.Kau_Git.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

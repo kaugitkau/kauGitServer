@@ -1,4 +1,4 @@
-package com.example.Kau_Git.Service;
+package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.service.GetFestivalService;
 import org.junit.jupiter.api.Test;

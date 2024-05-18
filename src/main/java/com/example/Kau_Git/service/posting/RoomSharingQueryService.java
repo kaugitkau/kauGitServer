@@ -1,4 +1,4 @@
-package com.example.Kau_Git.service;
+package com.example.Kau_Git.service.posting;
 
 import com.example.Kau_Git.dto.roomSharing.PostRoomSharingResponseDto;
 import com.example.Kau_Git.entity.Posting;
@@ -18,7 +18,7 @@ public class RoomSharingQueryService {
     private final PostingRepository postingRepository;
 
     public PostRoomSharingResponseDto.PostResultDto showPosting(Long postId) {
-        Posting byPostId = postingRepository.findByPostId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId);
         return PostRoomSharingResponseDto.PostResultDto.builder()
                 .title(byPostId.getTitle())
                 .content(byPostId.getContent())
@@ -39,7 +39,7 @@ public class RoomSharingQueryService {
         for (Posting posting : allPosting) {
             PostRoomSharingResponseDto.SimplePostDto build = PostRoomSharingResponseDto.SimplePostDto.builder()
                     .title(posting.getTitle())
-                    .postId(posting.getPostId())
+                    .postId(posting.getPostingId())
                     .build();
             simplePostDtos.add(build);
 
