@@ -17,6 +17,7 @@ public class CommentController {
     private final CommentQueryService queryService;
     private final CommentCommandService commandService;
 
+    //댓글 등록
     @PostMapping("/comment/{postId}")
     public void addComment(@PathVariable Long postingId, @RequestBody CommentRequestDto.AddCommentDto addCommentDto,
                            @Login SessionUser sessionUser) {
@@ -25,12 +26,14 @@ public class CommentController {
         commandService.addComment(postingId, userId, addCommentDto);
     }
 
+    //댓글 목록 조회
     @GetMapping("/comment/{postId}")
     public List<CommentResponseDto.CommentPreviewDto> getCommentPreviewList(@PathVariable Long postId) {
         List<CommentResponseDto.CommentPreviewDto> commentPreviewDtos = commandService.showComments(postId);
         return commentPreviewDtos;
     }
 
+    //댓글 삭제
     @DeleteMapping("/comment/{commentId}")
     public void deleteComment(@PathVariable Long commentId,
                               @Login SessionUser sessionUser) {

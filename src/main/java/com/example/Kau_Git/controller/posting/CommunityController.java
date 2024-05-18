@@ -17,20 +17,23 @@ public class CommunityController {
     private final Long testId = 1L;
 
 
+    //커뮤니티 글 등록
     @PostMapping("/community")
     public void addSharingPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto) {
-//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //이건 일단 남겨놓음.
+
         communityCommandService.addPosting(testId, addPostingDto);
 
     }
 
-    @GetMapping("/community/{postingId}")//오류발생: name과 변수명이 동일한 경우에는 생략 가능하지 않나? -> 일단 아닌걸로 하자.
+    //커뮤니티 글 상세내용 조회
+    @GetMapping("/community/{postingId}")
     // 컴파일 시에는 debugging enabled가 되어야 스프링이 찾을 수 있다.
     public CommunityResponseDto.PostingDto showPost(@PathVariable(name = "postingId") Long postingId) {
 
         return communityQueryService.showPosting(postingId);
     }
 
+    //커뮤니티 글 목록 조회
     @GetMapping("/community/allpost")
     public CommunityResponseDto.ListDto showAllPost() {
         return communityQueryService.showList();
