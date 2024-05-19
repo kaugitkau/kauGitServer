@@ -11,10 +11,10 @@ public class CommentResponseDto {
     @Getter
     @Builder
     public static class CommentPreviewDto{
-        private String writerId;
-        private LocalDateTime createdDate;
-        private String content;
-        private String nickName;
+        private String writerId; //작성자 ID
+        private LocalDateTime createdDate; //작성 날짜
+        private String content; //댓글 내용
+        private String nickName; //작성자의 별명(회원가입시 입력받는)
     }
 
     @Getter

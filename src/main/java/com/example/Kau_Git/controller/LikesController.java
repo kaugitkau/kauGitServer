@@ -14,10 +14,13 @@ public class LikesController {
 
     private final LikesCommandService likesCommandService;
 
-    @PostMapping("/like/{postId}")               //좋아요
+    //좋아요 - 좋아요 버튼을 누른 경우
+    @PostMapping("/like/{postId}")
     public void checkLikeButton(@PathVariable Long postId,
                                 @Login SessionUser sessionUser) {
+        //User의 ID를 가져옴
         Long userId = sessionUser.getUserId();
+        //user가 좋아요 버튼을 누름 -> 현재 상태(좋아요를 눌렀는지 여부)의 반대로 설정
         likesCommandService.checkLikeStatus(userId, postId);
     }
 

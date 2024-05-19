@@ -15,13 +15,13 @@ public class CommunityResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PostingDto {
-        private Integer viewCnt;
-        private Integer recommendedCnt;
-        private LocalDateTime createdAt;
-        private String region;
-        private String title;
-        private String content;
-        private String hashTag;
+        private Integer viewCnt; //추천수
+        private Integer recommendedCnt; //좋아요 수
+        private LocalDateTime createdAt; //생성날짜
+        private String region; //지역
+        private String title; //제목
+        private String content; //내용
+        private String hashTag; //게시물의 HashTag
 
     }
 
