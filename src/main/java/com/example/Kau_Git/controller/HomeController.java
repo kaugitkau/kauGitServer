@@ -25,6 +25,7 @@ public class HomeController {
 
     private final GetFestivalService gs;
 
+    //서버 배포 되는지 테스트용
     @GetMapping("/test")
     public String test() {
         return "index";

@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchingController {
     private final GuideCommandService guideCommandService;
 
-    @PostMapping("guide/match/{applicantId}/{guideId}")  //가이드가 작성한 글을 보고 멘티가 신청
+    //가이드가 작성한 글을 보고 멘티가 신청
+    @PostMapping("guide/match/{applicantId}/{guideId}")
     public void applyMatching(@PathVariable Long applicantId, @PathVariable Long guideId) {
 
         guideCommandService.applyMatching(applicantId, guideId);

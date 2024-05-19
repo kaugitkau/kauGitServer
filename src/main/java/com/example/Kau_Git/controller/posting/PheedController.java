@@ -20,6 +20,7 @@ public class PheedController {
     private final PheedCommandService snsCommandService;
     private final PheedQueryService pheedQueryService;
 
+    //피드 등록
     @PostMapping("/pheed")
     public Long addPheed(@RequestPart(value = "pheedDto") PheedRequestDto.MakePostingDto makePostingDto,
                            @RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
@@ -30,6 +31,7 @@ public class PheedController {
         return posting.getPostingId();
     }
 
+    //피드 목록 조회
     @GetMapping("/pheed")
     public PheedResponseDto.ListPheedDto getPheeds() {
 
