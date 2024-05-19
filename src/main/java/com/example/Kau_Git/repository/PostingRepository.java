@@ -20,7 +20,7 @@ public interface PostingRepository extends JpaRepository<Posting,Long> {
     @Query("SELECT SUM(p.recommendedCnt) FROM Posting p where p.writer.id = :userId")
     Integer sumRecommendedCntByUserId(@Param("userId") Long userId);
 
-    List<Posting> findAllByTitle(String title);
+    List<Posting> findAllByTitleContaining(String title);
 
 
 

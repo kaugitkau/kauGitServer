@@ -3,6 +3,7 @@ package com.example.Kau_Git.service;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.repository.PostingRepository;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class PostingService {
 
 
     public SearchResultListDto searchByTitle(String title){
-        List<Posting> allByTitle = postingRepository.findAllByTitle(title);
+        List<Posting> allByTitle = postingRepository.findAllByTitleContaining(title);
 
         List<SearchResultDto> searchResultDtoList = new ArrayList<>();
         for (Posting p:allByTitle){
@@ -47,6 +48,7 @@ public class PostingService {
         else return content;
     }
 
+    @Getter
     @Builder
     public static class SearchResultDto{
         Long postingId;
@@ -60,6 +62,7 @@ public class PostingService {
 
 
 
+    @Getter
     @Builder
     public static class SearchResultListDto{
         List<SearchResultDto> searchResultDtoList;
