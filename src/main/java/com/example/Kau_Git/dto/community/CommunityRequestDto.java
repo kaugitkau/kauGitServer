@@ -8,7 +8,7 @@ public class CommunityRequestDto {
 
     @Getter
     public static class AddPostingDto{
-        private String title;
+        private String title; //제목
         private String content;
         private String hashTag;
 
