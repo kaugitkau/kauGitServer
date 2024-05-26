@@ -48,6 +48,7 @@ public class TopService {
                             .name(posting.getTitle())
                             .region(posting.getWriter().getAddress())
                             .sharingAvgRated(posting.getWriter().getSharingAvgRated())
+                            .fileUrl(firstFileUrl)
                             .build();
                         })
                 .collect(Collectors.toList());
@@ -87,6 +88,7 @@ public class TopService {
         String name;
         String region;
         Double sharingAvgRated;
+        String fileUrl;
 
 
     }
