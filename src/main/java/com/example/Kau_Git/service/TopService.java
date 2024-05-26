@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,27 @@ public class TopService {
     }
 
 
+    public ListHotCommunityPostingsDto findHotPostings() {
+        List<Posting> hotPostings = postingRepository.findHotPostings();
+
+        List<HotCommunityPostingDto> collect = hotPostings.stream()
+                .map(posting -> HotCommunityPostingDto.builder()
+                        .recommendedCnt(posting.getRecommendedCnt())
+                        .createdAt(posting.getCreatedAt())
+                        .writer(posting.getWriter().getName())
+                        .title(posting.getTitle())
+                        .commentCnt(posting.getCommentCnt())
+                        .build())
+                .collect(Collectors.toList());
+
+        ListHotCommunityPostingsDto build = ListHotCommunityPostingsDto.builder()
+                .hotCommunityPostingDtos(collect)
+                .build();
+        return build;
+
+    }
+
+
     @Getter
     @Builder
     public static class ListTopMentorsDto{
@@ -90,6 +112,24 @@ public class TopService {
         Double sharingAvgRated;
         String fileUrl;
 
+
+    }
+
+    @Builder
+    @Getter
+    public static class HotCommunityPostingDto{
+        String title;
+        String writer;
+        Integer commentCnt;
+        Integer recommendedCnt;
+        LocalDateTime createdAt;
+
+
+    }
+    @Builder
+    @Getter
+    public static class ListHotCommunityPostingsDto{
+        List<HotCommunityPostingDto> hotCommunityPostingDtos;
 
     }
 

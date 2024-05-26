@@ -3,6 +3,7 @@ package com.example.Kau_Git.entity;
 import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ import java.util.List;
 @Table(name = "POSTING")
 @Builder
 @AllArgsConstructor
+@DynamicInsert
 public class Posting extends BaseEntity {
 
     @Id
@@ -46,6 +48,9 @@ public class Posting extends BaseEntity {
 
     private Integer recommendedCnt=0;
 
+    @Column(columnDefinition = "integer default 0")
+    private Integer commentCnt;//댓글수
+
     @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL)
     private List<Files> fileList = new ArrayList<>();
 
@@ -63,5 +68,13 @@ public class Posting extends BaseEntity {
 
     public void incrementRecommendedCnt(){
         this.recommendedCnt+=1;
+    }
+
+    public void decrementCommentCnt(){
+        this.commentCnt-=1;
+    }
+
+    public void incrementCommentCnt(){
+        this.commentCnt+=1;
     }
 }

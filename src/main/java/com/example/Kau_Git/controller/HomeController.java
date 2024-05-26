@@ -84,5 +84,12 @@ public class HomeController {
         return topHousings;
     }
 
+    @GetMapping("/hotpostings")
+    @ResponseBody
+    public TopService.ListHotCommunityPostingsDto getHotPostings(){
+        TopService.ListHotCommunityPostingsDto hotPostings = ts.findHotPostings();
+        return hotPostings;
+    }
+
 
 }

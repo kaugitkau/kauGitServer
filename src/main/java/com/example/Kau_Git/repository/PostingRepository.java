@@ -29,7 +29,8 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
     List<Posting> findTop3ByWeightedScore();
 
 
-
-
+    @Query(value = "SELECT * FROM Posting WHERE classification = 'C' AND is_hide = FALSE " +
+            "ORDER BY ((recommended_cnt * 2) + view_cnt + (comment_cnt*2)) / POW((TIMESTAMPDIFF(HOUR, created_at, NOW()) + 2), 1.8)", nativeQuery = true)
+    List<Posting> findHotPostings();
 
 }
