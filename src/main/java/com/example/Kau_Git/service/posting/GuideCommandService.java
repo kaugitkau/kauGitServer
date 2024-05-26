@@ -28,7 +28,7 @@ public class GuideCommandService extends AbstractPostingService {
         Posting build = Posting.builder()
                 .title(registGuidePostingDto.getTitle())
                 .content(registGuidePostingDto.getContent())
-                .classification('S')
+                .classification('M')
                 .build();
         postingRepository.save(build);
 
