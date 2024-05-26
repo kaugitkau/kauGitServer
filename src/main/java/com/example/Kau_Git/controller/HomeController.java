@@ -4,8 +4,10 @@ import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.service.GetFestivalService;
+import com.example.Kau_Git.service.TopService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.security.core.Authentication;
@@ -13,9 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import java.util.List;
 public class HomeController {
 
     private final GetFestivalService gs;
+    private final TopService ts;
 
     //서버 배포 되는지 테스트용
     @GetMapping("/test")
@@ -66,4 +67,29 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/topmentors")
+    @ResponseBody
+    public TopService.ListTopMentorsDto getTopMentors(){
+        TopService.ListTopMentorsDto topMentors = ts.findTopMentors();
+        return topMentors;
+
+
+    }
+
+    @GetMapping("/tophousings")
+    @ResponseBody
+    public TopService.ListTopHousingsDto getTopHousings(){
+        TopService.ListTopHousingsDto topHousings = ts.findTopHousings();
+        return topHousings;
+    }
+
+    @GetMapping("/hotpostings")
+    @ResponseBody
+    public TopService.ListHotCommunityPostingsDto getHotPostings(){
+        TopService.ListHotCommunityPostingsDto hotPostings = ts.findHotPostings();
+        return hotPostings;
+    }
+
+
 }

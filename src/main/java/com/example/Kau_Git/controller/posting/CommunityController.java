@@ -1,5 +1,7 @@
 package com.example.Kau_Git.controller.posting;
 
+import com.example.Kau_Git.Oauth.Login;
+import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.community.CommunityRequestDto;
 import com.example.Kau_Git.dto.community.CommunityResponseDto;
 import com.example.Kau_Git.service.posting.CommunityCommandService;
@@ -19,9 +21,11 @@ public class CommunityController {
 
     //커뮤니티 글 등록
     @PostMapping("/community")
-    public void addSharingPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto) {
+    public void addCommunityPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto,
+                                 @Login SessionUser sessionUser) {
 
-        communityCommandService.addPosting(testId, addPostingDto);
+        Long userId = sessionUser.getUserId();
+        communityCommandService.addPosting(userId, addPostingDto);
 
     }
 
