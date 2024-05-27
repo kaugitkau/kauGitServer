@@ -14,11 +14,17 @@ public class LikesController {
 
     private final LikesCommandService likesCommandService;
 
+<<<<<<< HEAD
     //좋아요 저장(안되어있으면 좋아요 처리하고, 이미 되어있다면 취소)
+=======
+    //좋아요 - 좋아요 버튼을 누른 경우
+>>>>>>> b90a956 (주석 처리)
     @PostMapping("/like/{postId}")
     public void checkLikeButton(@PathVariable Long postId,
                                 @Login SessionUser sessionUser) {
+        //User의 ID를 가져옴
         Long userId = sessionUser.getUserId();
+        //user가 좋아요 버튼을 누름 -> 현재 상태(좋아요를 눌렀는지 여부)의 반대로 설정
         likesCommandService.checkLikeStatus(userId, postId);
     }
 

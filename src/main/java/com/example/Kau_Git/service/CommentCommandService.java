@@ -22,25 +22,29 @@ public class CommentCommandService extends AbstractPostingService{
     private final UserRepository userRepository;
     private final PostingRepository postingRepository;
 
+    //댓글 작성
     public void addComment(Long postingId, Long writerId, CommentRequestDto.AddCommentDto addCommentDto) {
-        Posting byPostingId = postingRepository.findByPostingId(postingId);
-        User byUserId = userRepository.findByUserId(writerId);
+        Posting byPostingId = postingRepository.findByPostingId(postingId);//게시물의 ID를 가져옴
+        User byUserId = userRepository.findByUserId(writerId);//작성자의 ID를 가져옴
+
         Comment build = Comment.builder()
-                .content(addCommentDto.getContent())
-                .posting(byPostingId)
-                .writer(byUserId)
-                .build();
-        commentRepository.save(build);
+                .content(addCommentDto.getContent())//댓글 내용
+                .posting(byPostingId) //게시물 ID
+                .writer(byUserId) //작성자의 ID
+                .build(); //Comment Entity 생성
+        commentRepository.save(build); //저장
 
     }
 
+    //게시물의 댓글 보기
     public List<CommentResponseDto.CommentPreviewDto> showComments(Long postId) {
-        Posting byPostId = postingRepository.findByPostingId(postId);
+        Posting byPostId = postingRepository.findByPostingId(postId); //게시물의 ID를 가져옴
+        //게시물의 ID로 달린 댓글을 모두 가져옴
         List<CommentResponseDto.CommentPreviewDto> collect = commentRepository.findAllByPostingOrderByCreatedAtAsc(byPostId)
                 .stream()
                 .map(c -> CommentResponseDto.CommentPreviewDto.builder()
                         .content(c.getContent())
-                        .createdDate(c.getCreatedAt())
+                        .createdDate(c.getCreatedAt()) //생성 날짜
                         .nickName(c.getWriter().getNickname())
                         .writerId(c.getWriter().getId())
                         .build())
@@ -49,7 +53,9 @@ public class CommentCommandService extends AbstractPostingService{
 
     }
 
+    //댓글을 삭제하는 경우
     public void deleteComment(Long userId, Long commentId){
         commentRepository.deleteById(commentId);
     }
+    //commentId
 }

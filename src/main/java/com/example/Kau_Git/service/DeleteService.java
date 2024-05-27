@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class DeleteService {
     private final PostingRepository postingRepository;
-
+    //게시물 삭제
     public void deletePosting(Long postingId) {
         postingRepository.deleteById(postingId);
     }

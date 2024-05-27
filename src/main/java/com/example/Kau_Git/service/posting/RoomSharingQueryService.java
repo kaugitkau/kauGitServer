@@ -18,19 +18,22 @@ public class RoomSharingQueryService {
     private final PostingRepository postingRepository;
 
     public PostRoomSharingResponseDto.PostResultDto showPosting(Long postId) {
+        //DB에서 postId로 검색해서 게시물을 찾음
         Posting byPostId = postingRepository.findByPostingId(postId);
+        //
         return PostRoomSharingResponseDto.PostResultDto.builder()
-                .title(byPostId.getTitle())
-                .content(byPostId.getContent())
-                .writer(byPostId.getWriter().getNickname())
-                .viewCnt(byPostId.getViewCnt())
-                .recommendedCnt(byPostId.getRecommendedCnt())
+                .title(byPostId.getTitle()) //
+                .content(byPostId.getContent()) //내용
+                .writer(byPostId.getWriter().getNickname()) //작성자
+                .viewCnt(byPostId.getViewCnt()) //조회수
+                .recommendedCnt(byPostId.getRecommendedCnt()) //추천(좋아요)수
                 .build();
         //오류발생: Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
         //해결법: dto에 getter를 넣어야한다!
 
     }
 
+    //모든 게시물 조회하기
     public PostRoomSharingResponseDto.AllPostDto showAllPosting(){
         List<Posting> allPosting = postingRepository.findAll();
 
