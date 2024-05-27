@@ -25,15 +25,15 @@ import java.util.List;
 public class HomeController {
 
     private final GetFestivalService gs;
+    /*
     @PostMapping("/login")
-
+     */
     @GetMapping("/test")
     public String test() {
         return "index";
     }
 
     @GetMapping("/login")
-
     public String login(@RequestParam("provider") String provider, Model model) {
         // provider에 따라 네이버 또는 구글 로그인 페이지로 리다이렉트
         String redirectUrl = "redirect:/";
@@ -58,10 +58,13 @@ public class HomeController {
     }
 
 
+    /*
     @GetMapping("/logout")
     public ResponseEntity<Void> logout() {
         return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).header("Location", "/").build();
     }
+
+     */
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
