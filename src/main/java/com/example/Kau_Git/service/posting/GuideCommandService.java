@@ -25,10 +25,12 @@ public class GuideCommandService extends AbstractPostingService {
     private final UserRepository userRepository;
 
     public void registGuiding(GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, Long userId) {
+        User writer = userRepository.findByUserId(userId);
         Posting build = Posting.builder()
+                .writer(writer)
                 .title(registGuidePostingDto.getTitle())
                 .content(registGuidePostingDto.getContent())
-                .classification('S')
+                .classification('M')
                 .build();
         postingRepository.save(build);
 

@@ -8,8 +8,10 @@ import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.CommentRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,40 +24,35 @@ public class CommentCommandService extends AbstractPostingService{
     private final UserRepository userRepository;
     private final PostingRepository postingRepository;
 
-    //댓글 작성
+    @Transactional
     public void addComment(Long postingId, Long writerId, CommentRequestDto.AddCommentDto addCommentDto) {
-        Posting byPostingId = postingRepository.findByPostingId(postingId);//게시물의 ID를 가져옴
-        User byUserId = userRepository.findByUserId(writerId);//작성자의 ID를 가져옴
-
+        Posting byPostingId = postingRepository.findByPostingId(postingId);
+        User byUserId = userRepository.findByUserId(writerId);
         Comment build = Comment.builder()
-                .content(addCommentDto.getContent())//댓글 내용
-                .posting(byPostingId) //게시물 ID
-                .writer(byUserId) //작성자의 ID
-                .build(); //Comment Entity 생성
-        commentRepository.save(build); //저장
+                .content(addCommentDto.getContent())
+                .posting(byPostingId)
+                .writer(byUserId)
+                .build();
+
+        byPostingId.incrementCommentCnt();  //포스팅의 댓글수 1 증가
+
+
+        commentRepository.save(build);
 
     }
 
-    //게시물의 댓글 보기
-    public List<CommentResponseDto.CommentPreviewDto> showComments(Long postId) {
-        Posting byPostId = postingRepository.findByPostingId(postId); //게시물의 ID를 가져옴
-        //게시물의 ID로 달린 댓글을 모두 가져옴
-        List<CommentResponseDto.CommentPreviewDto> collect = commentRepository.findAllByPostingOrderByCreatedAtAsc(byPostId)
-                .stream()
-                .map(c -> CommentResponseDto.CommentPreviewDto.builder()
-                        .content(c.getContent())
-                        .createdDate(c.getCreatedAt()) //생성 날짜
-                        .nickName(c.getWriter().getNickname())
-                        .writerId(c.getWriter().getId())
-                        .build())
-                .collect(Collectors.toList());
-        return collect;
 
-    }
-
-    //댓글을 삭제하는 경우
+    @Transactional
     public void deleteComment(Long userId, Long commentId){
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new EntityNotFoundException("Comment not found with id " + commentId));
+
+        Posting posting = comment.getPosting(); // Comment로부터 Posting ID를 얻는다.
+
+        // 댓글을 삭제한다.
         commentRepository.deleteById(commentId);
+
+        posting.decrementCommentCnt();
+
     }
-    //commentId
 }

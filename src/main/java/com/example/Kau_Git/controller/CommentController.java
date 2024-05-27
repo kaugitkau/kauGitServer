@@ -17,12 +17,8 @@ public class CommentController {
     private final CommentQueryService queryService;
     private final CommentCommandService commandService;
 
-<<<<<<< HEAD
     //댓글 등록
-=======
-    //댓글을 작성하는 경우
->>>>>>> b90a956 (주석 처리)
-    @PostMapping("/comment/{postId}")
+    @PostMapping("/comment/{postingId}")
     public void addComment(@PathVariable Long postingId, @RequestBody CommentRequestDto.AddCommentDto addCommentDto,
                            @Login SessionUser sessionUser) {
         Long userId = sessionUser.getUserId();
@@ -30,22 +26,14 @@ public class CommentController {
         commandService.addComment(postingId, userId, addCommentDto);
     }
 
-<<<<<<< HEAD
     //댓글 목록 조회
-=======
-    //
->>>>>>> b90a956 (주석 처리)
     @GetMapping("/comment/{postId}")
     public List<CommentResponseDto.CommentPreviewDto> getCommentPreviewList(@PathVariable Long postId) {
-        List<CommentResponseDto.CommentPreviewDto> commentPreviewDtos = commandService.showComments(postId);
+        List<CommentResponseDto.CommentPreviewDto> commentPreviewDtos = queryService.showComments(postId);
         return commentPreviewDtos;
     }
 
-<<<<<<< HEAD
     //댓글 삭제
-=======
-    //댓글을 삭제하는 경우
->>>>>>> b90a956 (주석 처리)
     @DeleteMapping("/comment/{commentId}")
     public void deleteComment(@PathVariable Long commentId,
                               @Login SessionUser sessionUser) {

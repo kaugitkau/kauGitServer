@@ -9,6 +9,9 @@ import com.example.Kau_Git.service.posting.RoomSharingCommandService;
 import com.example.Kau_Git.service.posting.RoomSharingQueryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,10 +22,11 @@ public class SharingController {
 
     //쉐어링 글 등록
     @PostMapping("/roomShare")
-    public Long addSharingPost(@RequestBody PostRoomSharingRequestDto.RegistPostDto registPostDto,
+    public Long addSharingPost(@RequestPart(value = "sharingDto") PostRoomSharingRequestDto.RegistPostDto registPostDto,
+                               @RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
                                @Login SessionUser sessionUser) {//이건 일단 남겨놓음.
         Long userId = sessionUser.getUserId();
-        Posting posting = roomSharingCommandService.registSharing(registPostDto, userId);
+        Posting posting = roomSharingCommandService.registSharing(registPostDto,multipartFiles,  userId);
         return posting.getPostingId();
     }
 
