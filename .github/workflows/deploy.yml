@@ -1,4 +1,7 @@
 name: Deploy
+
+#deploy.yml은 push(pr에서 confirm merge를 하거나 진짜 push를 하거나)가 일어났을때, 진행. 나눈 이유는 pr을 날린것만으로 서버에 실행되는 파일에 변경이 일어났기 때문이다.
+#pr을 confirm해야 실제 docker-compose가 실행되어, 실행되고 있는 서버버전이 바뀜.
 on:
   push:
     branches: ["main"]

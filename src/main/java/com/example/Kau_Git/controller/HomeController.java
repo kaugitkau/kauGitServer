@@ -3,8 +3,10 @@ package com.example.Kau_Git.controller;
 import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.service.GetFestivalService;
+import com.example.Kau_Git.service.TopService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -25,9 +27,8 @@ import java.util.List;
 public class HomeController {
 
     private final GetFestivalService gs;
-    /*
-    @PostMapping("/login")
-     */
+    private final TopService ts;
+
     @GetMapping("/test")
     public String test() {
         return "index";
@@ -57,15 +58,6 @@ public class HomeController {
 
     }
 
-
-    /*
-    @GetMapping("/logout")
-    public ResponseEntity<Void> logout() {
-        return ResponseEntity.status(HttpStatus.TEMPORARY_REDIRECT).header("Location", "/").build();
-    }
-
-     */
-
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("로그아웃해야죠");
@@ -76,4 +68,29 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/topmentors")
+    @ResponseBody
+    public TopService.ListTopMentorsDto getTopMentors(){
+        TopService.ListTopMentorsDto topMentors = ts.findTopMentors();
+        return topMentors;
+
+
+    }
+
+    @GetMapping("/tophousings")
+    @ResponseBody
+    public TopService.ListTopHousingsDto getTopHousings(){
+        TopService.ListTopHousingsDto topHousings = ts.findTopHousings();
+        return topHousings;
+    }
+
+    @GetMapping("/hotpostings")
+    @ResponseBody
+    public TopService.ListHotCommunityPostingsDto getHotPostings(){
+        TopService.ListHotCommunityPostingsDto hotPostings = ts.findHotPostings();
+        return hotPostings;
+    }
+
+
 }
