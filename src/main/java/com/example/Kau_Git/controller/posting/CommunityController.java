@@ -16,9 +16,6 @@ public class CommunityController {
     private final CommunityQueryService communityQueryService;
 
 
-    private final Long testId = 1L;
-
-
     //커뮤니티 글 등록
     @PostMapping("/community")
     public void addCommunityPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto,

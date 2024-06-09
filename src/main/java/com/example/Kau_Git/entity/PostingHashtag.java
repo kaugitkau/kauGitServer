@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class PheedHashtag {
+public class PostingHashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FEEDHASHTAG_ID")
     private Long id;
 
-    public PheedHashtag(Posting posting, Hashtag hashtag) {
+    public PostingHashtag(Posting posting, Hashtag hashtag) {
         this.hashtag = hashtag;
         this.posting = posting;
 
