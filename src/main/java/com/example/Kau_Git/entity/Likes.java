@@ -27,4 +27,11 @@ public class Likes extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "POSTING_ID")
     private Posting posting;
+
+    @PreRemove
+    private void preRemove() {
+        if (posting != null) {
+            this.posting = null;
+        }
+    }
 }

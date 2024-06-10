@@ -3,11 +3,11 @@ package com.example.Kau_Git.service.posting;
 import com.example.Kau_Git.dto.GetS3Res;
 import com.example.Kau_Git.dto.pheed.PheedRequestDto;
 import com.example.Kau_Git.entity.Hashtag;
-import com.example.Kau_Git.entity.PheedHashtag;
+import com.example.Kau_Git.entity.PostingHashtag;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.HashtagRepository;
-import com.example.Kau_Git.repository.PheedHashtagRepository;
+import com.example.Kau_Git.repository.PostingHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import com.example.Kau_Git.repository.UserRepository;
 import com.example.Kau_Git.service.FilesService;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PheedCommandService {
     private final PostingRepository postingRepository;
-    private final PheedHashtagRepository pheedHashtagRepository;
+    private final PostingHashtagRepository postingHashtagRepository;
     private final HashtagRepository hashtagRepository;
     private final UserRepository userRepository;
     private final S3Service s3Service;
@@ -75,8 +75,8 @@ public class PheedCommandService {
                             .build();
                     Hashtag save = hashtagRepository.save(hashtag);
 
-                    PheedHashtag pheedHashtag = new PheedHashtag(posting, save);
-                    pheedHashtagRepository.save(pheedHashtag);
+                    PostingHashtag postingHashtag = new PostingHashtag(posting, save);
+                    postingHashtagRepository.save(postingHashtag);
                 });
 
     }

@@ -40,16 +40,18 @@ public class Posting extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     private User writer;
 
-    @Column(name = "REPORT_CNT")
+    @Column(name = "REPORT_CNT", columnDefinition = "integer default 0")
     private Short reportCnt;
 
 
-    private Integer viewCnt;
-
-    private Integer recommendedCnt=0;
+    @Column(columnDefinition = "integer default 0")
+    private Integer viewCnt=0;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer commentCnt;//댓글수
+    private Integer recommendedCnt;
+
+    @Column(columnDefinition = "integer default 0")
+    private Integer commentCnt=0;//댓글수
 
     @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL)
     private List<Files> fileList = new ArrayList<>();
