@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class PostingHashtag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "FEEDHASHTAG_ID")
     private Long id;
 
     public PostingHashtag(Posting posting, Hashtag hashtag) {
@@ -19,7 +18,7 @@ public class PostingHashtag {
 
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "posting_id")
     private Posting posting;
 

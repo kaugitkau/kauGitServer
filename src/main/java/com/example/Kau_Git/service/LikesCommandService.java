@@ -9,9 +9,11 @@ import com.example.Kau_Git.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class LikesCommandService {
     private final PostingRepository postingRepository;
     private final UserRepository userRepository;
@@ -25,13 +27,14 @@ public class LikesCommandService {
 
     public void checkLikeStatus(Long userId, Long postingId) {
         Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postingId);
-        if (like != null){
+        if (like == null) {
             likePosting(userId, postingId);
-        }
-        else{
+        } else {
             cancelLike(like);
         }
     }
+
+
     public void likePosting(Long userID, Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);
         User byUserId = userRepository.findByUserId(userID);
@@ -39,21 +42,28 @@ public class LikesCommandService {
                 .user(byUserId)
                 .posting(byPostId)
                 .build();
+
         save(build);
 
         byPostId.incrementRecommendedCnt(); //포스팅 엔티티의 좋아요수 필드 1 증가
+        postingRepository.save(byPostId);  // 변경 사항 저장
 
 
     }
 
-    public void cancelLike(Likes likes) {
 
-        Posting posting = likes.getPosting();
+    public void cancelLike(Likes like) {
+        like.getPosting().decrementRecommendedCnt();
 
-        likesRepository.delete(likes);
+            likesRepository.delete(like);
 
+
+    }
+
+    public void decrementLikeCount(Long postingId) {
+        Posting posting = postingRepository.findById(postingId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid posting Id"));
         posting.decrementRecommendedCnt();
+        postingRepository.save(posting); // 변경 사항을 저장하여 반영
     }
-
-
 }
