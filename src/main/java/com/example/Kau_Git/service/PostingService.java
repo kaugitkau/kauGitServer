@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.annotation.MergedAnnotations;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -67,6 +68,15 @@ public class PostingService {
     public static class SearchResultListDto{
         List<SearchResultDto> searchResultDtoList;
 
+    }
+
+
+    @Transactional
+    public void decrementLikeCount(Long postingId) {
+        Posting posting = postingRepository.findById(postingId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid posting Id"));
+        posting.decrementRecommendedCnt();
+        postingRepository.save(posting); // 변경 사항을 저장하여 반영
     }
 
 }
