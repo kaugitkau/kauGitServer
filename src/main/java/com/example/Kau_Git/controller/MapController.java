@@ -1,90 +1,73 @@
 package com.example.Kau_Git.controller;
 
+import com.example.Kau_Git.service.*;
 import com.example.Kau_Git.service.GetInfoService;
 import com.example.Kau_Git.service.KeywordSearchService;
-import com.example.Kau_Git.service.TravelNumService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+
+import java.awt.geom.Area;
+import java.security.Key;
 import java.util.List;
 import java.util.Map;
 
-@RestController // REST API 컨트롤러로 지정
+@Controller
 public class MapController {
 
     private final GetInfoService gs;
-    private final TravelNumService ts;
     private final KeywordSearchService ks;
 
     @Autowired
-    public MapController(GetInfoService gs, TravelNumService ts, KeywordSearchService ks) {
-        this.gs = gs;
-        this.ts = ts;
-        this.ks = ks;
+    public MapController(GetInfoService gs ,KeywordSearchService ks){
+        this.gs =gs;
+        this.ks=ks;
     }
+
 
     @GetMapping("/map")
-    public ResponseEntity<String> map() {
-        return ResponseEntity.ok("map");
+    public String map(){
+        return "map";
     }
-
+    
     @PostMapping("/getCoordinates")
-    public ResponseEntity<?> getCoordinates(@RequestBody Coordinates coordinates) {
+    public ResponseEntity<List<JSONObject>> getCoordinates(@RequestParam("lat") String latitude, @RequestParam("lng") String longitude) {
         try {
-            List<JSONObject> info = gs.getInfo(coordinates.getLatitude(), coordinates.getLongitude());
-            return ResponseEntity.ok(info);
+            List<JSONObject> info = gs.getInfo(latitude, longitude);
+            return new ResponseEntity<>(info, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing coordinates: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("/getTravelInfo")
-    public ResponseEntity<Map<String, Long>> getTravelInfo() {
+    @PostMapping("/getCode")
+    public ResponseEntity<Map<String, String>> getCode(@RequestParam("areaCode") int areaCode) {
         try {
-            Map<String, Long> travelInfo = ts.getInfo();
-            return ResponseEntity.ok(travelInfo);
+            Map<String, String> info = ks.getAreaInfo(areaCode);
+            return new ResponseEntity<>(info, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping("/getKeywordInfo")
-    public ResponseEntity<List<JSONObject>> getKeywordInfo() {
+    @PostMapping("/getKeywords")
+    public ResponseEntity<Map<String, String>> getKeyword(@RequestParam("areaCode") int areaCode,@RequestParam("sigunguCode") int sigunguCode, @RequestParam("keyword")String keyword){
         try {
-            List<JSONObject> keywordInfo = ks.getInfo();
-            return ResponseEntity.ok(keywordInfo);
+            Map<String, String> Info = (Map<String, String>) ks.getInfo(areaCode,sigunguCode,keyword);
+            return new ResponseEntity<>(Info, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    // 요청 바디에서 사용될 클래스
-    static class Coordinates { //원래 위도 경도 받아오는건 카카오 맵 상에 클릭으로 진행....
-        private String latitude;
-        private String longitude;
 
-        public Coordinates() {
-        }
 
-        public String getLatitude() {
-            return latitude;
-        }
 
-        public void setLatitude(String latitude) {
-            this.latitude = latitude;
-        }
 
-        public String getLongitude() {
-            return longitude;
-        }
-
-        public void setLongitude(String longitude) {
-            this.longitude = longitude;
-        }
-    }
 }

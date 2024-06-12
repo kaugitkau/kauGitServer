@@ -1,6 +1,6 @@
 package com.example.Kau_Git.service;
 
-
+import com.example.Kau_Git.service.AreaCodeService;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
@@ -13,36 +13,37 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class KeywordSearchService {
 
     private final RestTemplate rt;
+    private final AreaCodeService as;
 
     @Value("${api.key}")
     private String apiKey;
 
-    public KeywordSearchService(RestTemplate rt) {
+    public KeywordSearchService(RestTemplate rt, AreaCodeService as) {
         this.rt = rt;
+        this.as = as;
     }
-
 
     private static final String BASE_URL = "https://apis.data.go.kr/B551011/EngService1/searchKeyword1";
 
+    public List<JSONObject> getInfo(int areaCode, int sigunguCode, String keyword) {
 
-    public List<JSONObject> getInfo() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(BASE_URL)
                 .queryParam("MobileOS", "etc")
                 .queryParam("MobileApp", "hanzoom")
-                .queryParam("keyword", "pharmacy")
-                .queryParam("serviceKey", apiKey); // 서비스 키를 직접 제공
+                .queryParam("keyword", keyword) // 키워드 추가
+                .queryParam("areaCode", areaCode) // 지역 코드 추가
+                .queryParam("sigunguCode", sigunguCode) // 시군구 코드 추가
+                .queryParam("serviceKey", apiKey); // 서비스 키 추가
 
-        // URI를 문자열로 변환하고, + 문자를 %2B로 변환
         String uriString = builder.build().encode().toUriString().replace("+", "%2B");
-
         uriString += "&_type=json";
 
-        // 변환된 URI 문자열로 URI 객체 생성
         URI uri = URI.create(uriString);
 
         String response = rt.getForObject(uri, String.class);
@@ -56,7 +57,7 @@ public class KeywordSearchService {
             JSONObject responseObj = (JSONObject) jsonResponse.get("response");
             JSONObject body = (JSONObject) responseObj.get("body");
             JSONObject items = (JSONObject) body.get("items");
-            JSONArray itemArray = (JSONArray) items.get("item"); //여기 까지는 무조건 똑같음
+            JSONArray itemArray = (JSONArray) items.get("item");
 
             for (Object item : itemArray) {
                 JSONObject itemObj = (JSONObject) item;
@@ -78,7 +79,10 @@ public class KeywordSearchService {
         }
 
         return keywordlist;
+    }
 
+    public Map<String, String> getAreaInfo(int areaCode) {
+        return as.getInfo(areaCode);
     }
 
 }
