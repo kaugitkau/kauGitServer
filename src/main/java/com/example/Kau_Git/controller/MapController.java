@@ -3,6 +3,7 @@ package com.example.Kau_Git.controller;
 import com.example.Kau_Git.service.*;
 import com.example.Kau_Git.service.GetInfoService;
 import com.example.Kau_Git.service.KeywordSearchService;
+import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -20,7 +22,7 @@ import java.security.Key;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 public class MapController {
 
     private final GetInfoService gs;
