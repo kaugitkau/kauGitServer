@@ -1,7 +1,6 @@
 package com.example.Kau_Git.controller;
 
 import com.example.Kau_Git.Oauth.Login;
-import com.example.Kau_Git.Oauth.OAuthAttributes;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.service.GetFestivalService;
 import com.example.Kau_Git.service.TopService;
@@ -10,23 +9,26 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minidev.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class HomeController {
 
     private final GetFestivalService gs;
     private final TopService ts;
 
-    //서버 배포 되는지 테스트용
     @GetMapping("/test")
     public String test() {
         return "index";
@@ -44,17 +46,16 @@ public class HomeController {
         return redirectUrl;
     }
 
+
     @GetMapping("/")
-    public String home(@Login SessionUser user, Model model) {
+    public ResponseEntity<?> home(@Login SessionUser user) {
         if (user != null) {
-            model.addAttribute("userName", user.getName());
+            List<JSONObject> festivals = gs.getFestival();
+            return ResponseEntity.ok().body(festivals);
+        } else {
+            return ResponseEntity.noContent().build();
         }
-        System.out.println("로그아웃해야죠22");
 
-        List<JSONObject> festivals = gs.getFestival();
-        model.addAttribute("festivals",festivals);
-
-        return "home";
     }
 
     @GetMapping("/logout")

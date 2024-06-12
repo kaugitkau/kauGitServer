@@ -36,7 +36,6 @@ public class MentoringController {
         GuideResponseDto.ShowAllPostDto showAllPostDto = guideQueryService.showAllPost();
         System.out.println(sessionUser.getUserId());
         return showAllPostDto;
-
     }
 
 
