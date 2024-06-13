@@ -6,6 +6,10 @@ import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -41,7 +45,12 @@ public class AreaCodeService {
 
         URI uri = URI.create(uriString);
 
-        String response = rt.getForObject(uri, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + apiKey);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> responseEntity = rt.exchange(uri, HttpMethod.GET, entity, String.class);
+        String response = responseEntity.getBody();
 
         Map<String, String> areaCodeMap = new HashMap<>();
 
