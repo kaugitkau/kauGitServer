@@ -9,33 +9,36 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+@Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
-@Configuration
 public class SecurityConfig { // 시큐리티 환경 설정 클래스
 
     private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화
-                .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/getCoordinates", "/getCode", "/getKeywords").permitAll() // 특정 엔드포인트 접근 허용
+                .csrf(AbstractHttpConfigurer::disable)
+                /*.headers(headers -> headers
+                        .contentSecurityPolicy("script-src 'self'; frame-ancestors 'self';"))
+                */
+                .authorizeHttpRequests((author)->author
+                        .requestMatchers( "/**","/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/test" , "/swagger-ui/**", "/v3/api-docs/**", "/getCoordinates", "/getCode", "/getKeywords").permitAll()
                         .requestMatchers("/api/v1/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutUrl("/logout") // 로그아웃 처리 URL 명시적 설정 (선택적)
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true))
+                        .invalidateHttpSession(true)
+                )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
-                        .defaultSuccessUrl("/", true)); //default 경로
-
+                        .defaultSuccessUrl("/", true));
         return http.build();
     }
-}
 
+}
 //@Configuration
 //@EnableWebSecurity
 //@RequiredArgsConstructor
