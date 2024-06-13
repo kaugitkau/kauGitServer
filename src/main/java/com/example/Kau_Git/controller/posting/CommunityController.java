@@ -42,10 +42,4 @@ public class CommunityController {
         return communityQueryService.showList();
     }
 
-
-    @PostMapping("/{id}/disLike")
-    public void decrementLike(@PathVariable(name = "id") Long id) {
-        postingService.decrementLikeCount(id);
-    }
-
 }

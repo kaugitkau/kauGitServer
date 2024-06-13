@@ -24,8 +24,10 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
                         .contentSecurityPolicy("script-src 'self'; frame-ancestors 'self';"))
                 */
                 .authorizeHttpRequests((author)->author
-                        .requestMatchers( "/**","/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/test" , "/swagger-ui/**", "/v3/api-docs/**", "/getCoordinates", "/getCode", "/getKeywords").permitAll()
+                        .requestMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/test" , "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole("USER")
+                        .requestMatchers("/community").authenticated() // /community 경로는 인증 필요
+                        .requestMatchers("/community/**").permitAll() // /community/ 하위 경로는 접근 허용
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutUrl("/logout") // 로그아웃 처리 URL 명시적 설정 (선택적)
