@@ -23,22 +23,16 @@ public class MentoringController {
 //포인트 얼마 이상 아니면 exception발생하게 하자.
     }
 
-<<<<<<< HEAD
     //멘토링 모집글 상세내용 조회
-=======
     //가이드가 작성한 모집글 상세내용 조회
->>>>>>> b90a956 (주석 처리)
     @GetMapping("/guide/{postingId}")
     public GuideResponseDto.ShowPostingDto showPost(@PathVariable Long postingId) {
         GuideResponseDto.ShowPostingDto showPostingDto = guideQueryService.showPost(postingId);
         return showPostingDto;
     }
 
-<<<<<<< HEAD
     //멘토링 모집글 목록 조회
-=======
     //가이드들이 작성한 모집글을 조회
->>>>>>> b90a956 (주석 처리)
     @GetMapping("/guide/allpost")
     public GuideResponseDto.ShowAllPostDto showAllPost(@Login SessionUser sessionUser) {
         GuideResponseDto.ShowAllPostDto showAllPostDto = guideQueryService.showAllPost();

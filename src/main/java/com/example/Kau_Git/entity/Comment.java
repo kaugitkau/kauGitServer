@@ -44,4 +44,11 @@ public class Comment extends BaseEntity {
     //숨김 여부 - 가이드라인 위반으로 Hide처리 되었는지
     @Column(name = "IS_HIDE_FLAG", nullable = false)
     private boolean isHideFlag = false;
+
+    //신고횟수 증가
+    public void incrementWarningCnt(){this.warningCnt += 1;}
+    //신고횟수 감소
+    public void decrementWarningCnt(){this.warningCnt -= 1;}
+    //게시물 보이기 & 숨기기
+    public void changeHideState(Boolean setValue){this.isHideFlag = setValue;}
 }

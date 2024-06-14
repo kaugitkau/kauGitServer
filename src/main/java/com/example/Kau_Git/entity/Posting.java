@@ -3,10 +3,9 @@ package com.example.Kau_Git.entity;
 import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class Posting extends BaseEntity {
     private User writer;
 
     @Column(name = "REPORT_CNT")
-    private Short reportCnt;
+    private Integer reportCnt;
 
 
     private Integer viewCnt;
@@ -62,6 +61,8 @@ public class Posting extends BaseEntity {
     @Column(name = "IS_HIDE", nullable = false)
     private boolean isHide = false;
 
+    public void changeHideState(Boolean setState){this.isHide = setState;}
+
     public void decrementRecommendedCnt(){
         this.recommendedCnt-=1;
     }
@@ -77,4 +78,10 @@ public class Posting extends BaseEntity {
     public void incrementCommentCnt(){
         this.commentCnt+=1;
     }
+
+    public void incrementReportCnt(){this.reportCnt += 1;}
+
+    public void decrementReportCnt(){this.reportCnt -= 1;}
+
+
 }

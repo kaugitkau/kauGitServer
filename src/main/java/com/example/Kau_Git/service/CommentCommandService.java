@@ -49,9 +49,9 @@ public class CommentCommandService extends AbstractPostingService{
 
         Posting posting = comment.getPosting(); // Comment로부터 Posting ID를 얻는다.
 
-        // 댓글을 삭제한다.
+        // 댓글을 ID로 삭제
         commentRepository.deleteById(commentId);
-
+        
         posting.decrementCommentCnt();
 
     }
