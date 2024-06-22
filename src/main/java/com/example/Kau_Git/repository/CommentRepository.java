@@ -4,6 +4,7 @@ import com.example.Kau_Git.entity.Comment;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,8 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     Comment findByCommentId(Long commentId);
 
+
     //신고횟수가 특정 수 이상이면 가져오는 것
-    List<Comment> findAllWithValueGreaterThan(@Param("warningCnt") int value);
+    @Query("SELECT c FROM Comment c WHERE c.warningCnt > :value")
+    List<Comment> findAllWithValueGreaterThan(@Param("value") int value);
 }

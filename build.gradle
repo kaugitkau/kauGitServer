@@ -40,6 +40,8 @@ dependencies {
 	// swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
+	//에러 핸들러 관련해서 spring에서 제공해주는 validation과 관련된 기능을 사용하기 위함
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 }
 
