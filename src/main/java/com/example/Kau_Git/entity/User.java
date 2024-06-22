@@ -101,4 +101,8 @@ public class User  extends BaseEntity {
         return userId;
     }
 
+    public void setUserBanStatus(boolean status){
+        this.hasBannedFlag = status;
+    }
+
 }

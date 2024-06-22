@@ -1,8 +1,8 @@
 package com.example.Kau_Git.repository;
 
 import com.example.Kau_Git.entity.Hashtag;
-import com.example.Kau_Git.entity.PostingHashtag;
 import com.example.Kau_Git.entity.Posting;
+import com.example.Kau_Git.entity.PostingHashtag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

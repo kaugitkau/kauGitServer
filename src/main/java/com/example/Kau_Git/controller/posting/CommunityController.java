@@ -4,7 +4,6 @@ import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.dto.community.CommunityRequestDto;
 import com.example.Kau_Git.dto.community.CommunityResponseDto;
-import com.example.Kau_Git.service.PostingService;
 import com.example.Kau_Git.service.posting.CommunityCommandService;
 import com.example.Kau_Git.service.posting.CommunityQueryService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class CommunityController {
     private final CommunityCommandService communityCommandService;
     private final CommunityQueryService communityQueryService;
-    private final PostingService postingService;
+
+
+    private final Long testId = 1L;
 
 
     //커뮤니티 글 등록

@@ -28,11 +28,6 @@ public class SearchController {
         return searchResultListDto;
     }
 
-//    @Getter
-//    public static class SearchWordDto{
-//        String word;
-//
-//    }
 }
 
 

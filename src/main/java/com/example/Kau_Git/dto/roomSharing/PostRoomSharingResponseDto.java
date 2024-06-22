@@ -12,12 +12,12 @@ public class PostRoomSharingResponseDto {
     @Builder
     @AllArgsConstructor
     public static class PostResultDto {
-        private String title;
-        private String content;
-        private String writer;
+        private String title; //제목
+        private String content; //내용
+        private String writer; //작성자
 
-        private Integer viewCnt;
-        private Integer recommendedCnt;
+        private Integer viewCnt; //조회수
+        private Integer recommendedCnt; //추천(좋아요) 수
     }
 
     @Getter

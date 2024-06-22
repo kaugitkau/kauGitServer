@@ -21,13 +21,13 @@ public class PheedResponseDto {
     @Getter
     public static class PheedDto{
         private Long postingId;
-        private String writer;
-        private LocalDateTime createdAt;
-        private String content;
-        private Integer recommendedCnt;
-        private Integer commentCnt;
-        private List<String> fileUrls;
-        private List<String> hashtags;
+        private String writer; //작성자
+        private LocalDateTime createdAt; //작성 일자
+        private String content; //내용
+        private Integer recommendedCnt; //추천 수 - 좋아요 수
+        private Integer commentCnt; //해당 게시물에 달린 댓글 수
+        private List<String> fileUrls; //파일 링크 - 사진등
+        private List<String> hashtags; //해쉬태그
 
 
     }

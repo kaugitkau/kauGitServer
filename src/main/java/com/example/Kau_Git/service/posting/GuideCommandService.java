@@ -25,29 +25,37 @@ public class GuideCommandService extends AbstractPostingService {
     private final UserRepository userRepository;
 
     public void registGuiding(GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, Long userId) {
+        //userRepository에서 작성자를 찾아옴
         User writer = userRepository.findByUserId(userId);
+        //Entity 생성
         Posting build = Posting.builder()
-                .writer(writer)
-                .title(registGuidePostingDto.getTitle())
-                .content(registGuidePostingDto.getContent())
-                .classification('M')
+                .writer(writer) //작성자
+                .title(registGuidePostingDto.getTitle()) //제목
+                .content(registGuidePostingDto.getContent()) //
+                .classification('M') //분류
                 .build();
         postingRepository.save(build);
 
     }
-
+    //Matching 요청을 DB에 저장
     public void applyMatching(Long applicantId, Long respondentId){
+        //신청자 ID를 찾아옴
         User applicant = userRepository.findByUserId(applicantId);
+        //가이드 ID를 찾아옴
         User respondent = userRepository.findByUserId(respondentId);
+        //ApplicantRespondent 생성
         ApplicantRespondent build = ApplicantRespondent.builder()
                 .applicant(applicant)
                 .respondent(respondent)
                 .status(GuideMatchingStatus.WAITING)
                 .build();
-        guideMatchingRepository.save(build);
+        guideMatchingRepository.save(build);//생성후 저장
 
     }
+
+    //Matching을 수락하는 경우
     public void acceptMatching(Long guideMatchingId){
+        //
         Optional<ApplicantRespondent> byId = guideMatchingRepository.findById(guideMatchingId);//예외처리 필요
         byId.get().changeStatus(GuideMatchingStatus.ACCEPTED);
 

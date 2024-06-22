@@ -3,10 +3,9 @@ package com.example.Kau_Git.entity;
 import com.example.Kau_Git.entity.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,18 +39,16 @@ public class Posting extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     private User writer;
 
-    @Column(name = "REPORT_CNT", columnDefinition = "integer default 0")
-    private Short reportCnt;
+    @Column(name = "REPORT_CNT")
+    private Integer reportCnt;
 
 
-    @Column(columnDefinition = "integer default 0")
-    private Integer viewCnt=0;
+    private Integer viewCnt;
 
-    @Column(columnDefinition = "integer default 0")
-    private Integer recommendedCnt;
+    private Integer recommendedCnt=0;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer commentCnt=0;//댓글수
+    private Integer commentCnt;//댓글수
 
     @OneToMany(mappedBy = "posting", cascade = CascadeType.ALL)
     private List<Files> fileList = new ArrayList<>();
@@ -63,6 +60,8 @@ public class Posting extends BaseEntity {
 
     @Column(name = "IS_HIDE", nullable = false)
     private boolean isHide = false;
+
+    public void changeHideState(Boolean setState){this.isHide = setState;}
 
     public void decrementRecommendedCnt(){
         this.recommendedCnt-=1;
@@ -79,4 +78,10 @@ public class Posting extends BaseEntity {
     public void incrementCommentCnt(){
         this.commentCnt+=1;
     }
+
+    public void incrementReportCnt(){this.reportCnt += 1;}
+
+    public void decrementReportCnt(){this.reportCnt -= 1;}
+
+
 }

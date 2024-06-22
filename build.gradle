@@ -43,11 +43,6 @@ dependencies {
 	//에러 핸들러 관련해서 spring에서 제공해주는 validation과 관련된 기능을 사용하기 위함
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-//	//세션을 위한 redis
-//	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-//	implementation 'org.springframework.session:spring-session-data-redis'
-
-
 }
 
 tasks.named('test') {

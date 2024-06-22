@@ -33,6 +33,9 @@ public interface PostingRepository extends JpaRepository<Posting, Long> {
             "ORDER BY ((recommended_cnt * 2) + view_cnt + (comment_cnt*2)) / POW((TIMESTAMPDIFF(HOUR, created_at, NOW()) + 2), 1.8)", nativeQuery = true)
     List<Posting> findHotPostings();
 
+    @Query("SELECT p FROM Posting p WHERE p.reportCnt > :reportCnt")
+    List<Posting> findAllWithValueGreaterThan(@Param("reportCnt") int value);
+
 
 
 }
