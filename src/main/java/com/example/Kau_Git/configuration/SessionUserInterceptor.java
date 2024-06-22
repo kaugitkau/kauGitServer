@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
-public class SessionUserInterceptor implements HandlerInterceptor {
+public class SessionUserInterceptor implements HandlerInterceptor { //카우깃 화이팅
 
     private final HttpSession httpSession;
 
