@@ -37,6 +37,7 @@ public class CommunityQueryService {
         List<CommunityResponseDto.PreviewDto> collect = postings.stream()
                 .map(posting ->
                         CommunityResponseDto.PreviewDto.builder()
+                                .postingId(posting.getPostingId())
                                 .title(posting.getTitle())
                                 .createdAt(posting.getCreatedAt())
                                 .commentCount(commentRepository.countByPosting_PostingId(posting.getPostingId()))

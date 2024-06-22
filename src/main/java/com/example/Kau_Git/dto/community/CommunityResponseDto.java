@@ -30,6 +30,7 @@ public class CommunityResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PreviewDto {
+        private Long postingId;
         private String title; //제목
         private String description; //한 줄 요약
         private String region; //지역

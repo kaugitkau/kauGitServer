@@ -23,5 +23,5 @@ public interface CommentRepository extends JpaRepository<Comment,Long> {
 
     //신고횟수가 특정 수 이상이면 가져오는 것
     @Query("SELECT c FROM Comment c WHERE c.warningCnt > :value")
-    List<Comment> findAllWithValueGreaterThan(@Param("value") int value);
+    List<Comment> findAllWithValueGreaterThan(@Param("value") int 강석우 );
 }
