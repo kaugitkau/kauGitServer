@@ -25,11 +25,11 @@ public class ApplicantRespondent extends BaseEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "APPLICANT_ID")
+    @JoinColumn(name = "APPLICANTID")
     private User applicant;
 
     @ManyToOne
-    @JoinColumn(name = "RESPONDENT_ID")
+    @JoinColumn(name = "guideid")
     private User respondent;
 
     private String reason;

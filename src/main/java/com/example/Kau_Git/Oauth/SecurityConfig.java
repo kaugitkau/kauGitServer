@@ -9,6 +9,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import com.example.Kau_Git.service.CustomOAuth2UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -23,6 +33,7 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
                 /*.headers(headers -> headers
                         .contentSecurityPolicy("script-src 'self'; frame-ancestors 'self';"))
                 */
+
                 .authorizeHttpRequests((author)->author
                         .requestMatchers( "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile", "/test" , "/swagger-ui/**", "/v3/api-docs/**", "search/**").permitAll()
                         .requestMatchers("/api/v1/**").hasRole("USER")
@@ -36,11 +47,14 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
-                        .defaultSuccessUrl("http://localhost:3000/", true));
+                        .defaultSuccessUrl("/", true));
         return http.build();
     }
 
 }
+
+
+//.defaultSuccessUrl("http://localhost:3000/", true));
 //@Configuration
 //@EnableWebSecurity
 //@RequiredArgsConstructor

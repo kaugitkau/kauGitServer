@@ -35,7 +35,7 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam("provider") String provider, Model model) {
+    public String login(@RequestParam("provider") String provider) {
         // provider에 따라 네이버 또는 구글 로그인 페이지로 리다이렉트
         String redirectUrl = "redirect:/";
         if ("naver".equals(provider)) {

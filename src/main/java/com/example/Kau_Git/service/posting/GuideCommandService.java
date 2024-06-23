@@ -12,6 +12,7 @@ import com.example.Kau_Git.repository.UserRepository;
 import com.example.Kau_Git.service.AbstractPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,7 @@ public class GuideCommandService extends AbstractPostingService {
     private final GuideMatchingRepository guideMatchingRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     public void registGuiding(GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, Long userId) {
         //userRepository에서 작성자를 찾아옴
         User writer = userRepository.findByUserId(userId);
@@ -38,6 +40,7 @@ public class GuideCommandService extends AbstractPostingService {
 
     }
     //Matching 요청을 DB에 저장
+    @Transactional
     public void applyMatching(Long applicantId, Long respondentId){
         //신청자 ID를 찾아옴
         User applicant = userRepository.findByUserId(applicantId);
@@ -50,19 +53,24 @@ public class GuideCommandService extends AbstractPostingService {
                 .status(GuideMatchingStatus.WAITING)
                 .build();
         guideMatchingRepository.save(build);//생성후 저장
-
     }
 
     //Matching을 수락하는 경우
-    public void acceptMatching(Long guideMatchingId){
-        //
-        Optional<ApplicantRespondent> byId = guideMatchingRepository.findById(guideMatchingId);//예외처리 필요
-        byId.get().changeStatus(GuideMatchingStatus.ACCEPTED);
+    @Transactional
+    public void acceptMatching(Long guideMatchingId) {
+        ApplicantRespondent matching = guideMatchingRepository.findById(guideMatchingId)
+                .orElseThrow(() -> new IllegalArgumentException("Matching not found with id: " + guideMatchingId));
 
+        matching.changeStatus(GuideMatchingStatus.ACCEPTED);
+        guideMatchingRepository.save(matching);
     }
 
+
+    @Transactional(readOnly = true)
     public List<ApplicantRespondent> getMatchingList(Long guideId) {
+
         User guide = userRepository.findByUserId(guideId);
+
         return guideMatchingRepository.findAllByRespondent(guide);
     }
 }

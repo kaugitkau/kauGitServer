@@ -85,5 +85,4 @@ public class Posting extends BaseEntity {
 
     public void decrementReportCnt(){this.reportCnt -= 1;}
 
-
 }
