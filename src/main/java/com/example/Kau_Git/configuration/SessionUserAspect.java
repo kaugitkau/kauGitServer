@@ -16,7 +16,7 @@ public class SessionUserAspect {
         this.httpSession = httpSession;
     }
 
-    @Before("execution(* com.example.Kau_Git.Controller.*.*(..))")
+    @Before("execution(* com.example.Kau_Git.controller.*.*(..))")
     public void addSessionUserToModel() {
         SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {

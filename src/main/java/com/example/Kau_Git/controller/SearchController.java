@@ -20,7 +20,6 @@ public class SearchController {
         return searchResultDto;
     }
 
-
     //해쉬태그로 포스팅들 조회
     @GetMapping("/search/hashtag")
     public PostingService.SearchResultListDto searchPostingByHashtag(@RequestParam(name = "hashtag") String hashtag){

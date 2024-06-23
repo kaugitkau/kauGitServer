@@ -13,4 +13,6 @@ public class DeleteService {
     public void deletePosting(Long postingId) {
         postingRepository.deleteById(postingId);
     }
+
+
 }

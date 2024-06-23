@@ -1,5 +1,6 @@
 package com.example.Kau_Git.service;
 
+import com.example.Kau_Git.dto.LikeRequestDto;
 import com.example.Kau_Git.entity.Likes;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
@@ -25,10 +26,13 @@ public class LikesCommandService {
     }
 
 
-    public void checkLikeStatus(Long userId, Long postingId) {
-        Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postingId);
+    public void checkLikeStatus(LikeRequestDto likeRequestDto) {
+        Long userId = likeRequestDto.getUserId();
+        Long postId = likeRequestDto.getPostId();
+
+        Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postId);
         if (like == null) {
-            likePosting(userId, postingId);
+            likePosting(userId, postId);
         } else {
             cancelLike(like);
         }
@@ -47,7 +51,6 @@ public class LikesCommandService {
 
         byPostId.incrementRecommendedCnt(); //포스팅 엔티티의 좋아요수 필드 1 증가
         postingRepository.save(byPostId);  // 변경 사항 저장
-
 
     }
 
