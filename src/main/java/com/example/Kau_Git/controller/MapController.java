@@ -1,9 +1,11 @@
 package com.example.Kau_Git.controller;
 
+import com.example.Kau_Git.Oauth.SessionUser;
 import com.example.Kau_Git.service.*;
 import com.example.Kau_Git.service.GetInfoService;
 import com.example.Kau_Git.service.KeywordSearchService;
 import com.example.Kau_Git.service.TravelNumService;
+import jakarta.servlet.http.HttpServletRequest;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.awt.geom.Area;
 import java.security.Key;
@@ -43,8 +45,9 @@ public class MapController {
     }
 
     @PostMapping("/getCoordinates") //ok
-    public ResponseEntity<List<JSONObject>> getCoordinates(@RequestParam("lat") String latitude, @RequestParam("lng") String longitude) {
+    public ResponseEntity<List<JSONObject>> getCoordinates(HttpServletRequest request, @RequestParam("lat") String latitude, @RequestParam("lng") String longitude) {
         try {
+            SessionUser user = (SessionUser) request.getAttribute("user");
             List<JSONObject> info = gs.getInfo(latitude, longitude);
             return new ResponseEntity<>(info, HttpStatus.OK);
         } catch (Exception e) {

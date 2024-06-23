@@ -1,6 +1,7 @@
 package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.entity.Posting;
+import com.example.Kau_Git.repository.PostingHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostingService {
     private final PostingRepository postingRepository;
+    private final PostingHashtagRepository postingHashtagRepository;
 
 
     public SearchResultListDto searchByTitle(String title){
@@ -48,6 +50,8 @@ public class PostingService {
         else return content;
     }
 
+
+
     @Getter
     @Builder
     public static class SearchResultDto{
@@ -66,6 +70,29 @@ public class PostingService {
     @Builder
     public static class SearchResultListDto{
         List<SearchResultDto> searchResultDtoList;
+
+    }
+
+    public SearchResultListDto searchByHashtag(String hashTag){
+        List<Posting> allByHashtag = postingHashtagRepository.findPostingByHashtag(hashTag);
+
+        List<SearchResultDto> searchResultDtoList = new ArrayList<>();
+        for (Posting p:allByHashtag){
+            SearchResultDto build = SearchResultDto.builder()
+                    .title(p.getTitle())
+                    .shortContent(makeShortContent(p.getContent()))
+                    .postingId(p.getPostingId())
+                    .createdDate(p.getCreatedAt())
+                    .build();
+            searchResultDtoList.add(build);
+
+        }
+
+        SearchResultListDto list = SearchResultListDto.builder()
+                .searchResultDtoList(searchResultDtoList)
+                .build();
+
+        return list;
 
     }
 
