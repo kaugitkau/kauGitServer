@@ -20,9 +20,11 @@ public class GuideQueryService {
     private final UserRepository userRepository;
     private final PostingRepository postingRepository;
 
+    //게시물 보여주기
     public GuideResponseDto.ShowPostingDto showPost(Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);
         User user = byPostId.getWriter();
+        //멘토의 정보를 가지고 있는 DTO
         PostingProfileDto build = PostingProfileDto.builder()
                 .nickname(user.getNickname())
                 .region(user.getAddress())
@@ -31,6 +33,7 @@ public class GuideQueryService {
                 .photo(user.getProfileImage())
                 .avgRated(user.getMentoringAvgRated())
                 .build();
+        //멘토가 작성한 글에 대한 DTO
         GuideResponseDto.ShowPostingDto build1 = GuideResponseDto.ShowPostingDto.builder()
                 .title(byPostId.getTitle())
                 .content(byPostId.getContent())
@@ -38,8 +41,11 @@ public class GuideQueryService {
                 .userId(byPostId.getWriter().getUserId())
                 .postingProfileDto(build)
                 .build();
+
         return build1;
     }
+
+    //목록에서 모든 모집글 조회하기
     public GuideResponseDto.ShowAllPostDto showAllPost(){
         List<Posting> all = postingRepository.findAllByClassification('G');
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =

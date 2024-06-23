@@ -43,7 +43,7 @@ public class ReportController {
     }
 
     //게시물 차단 처리
-    @PostMapping("/report/request/")
+    @PostMapping("/report/request")
     public void processReport(@RequestBody HandleReportService.BannedContentDto form) {
         handleReportService.bannedContent(form);
     }

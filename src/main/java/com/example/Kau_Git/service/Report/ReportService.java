@@ -59,7 +59,7 @@ public class ReportService extends AbstractPostingService {
         reportCommentRepository.save(build);
 
         //기준 : 몇 개의 신고가 접수되면, 관리자 처리 전에 숨김처리를 할지
-        int guideValue = 100;
+        int guideValue = 5;
 
         //신고 횟수를 하나 추가
         comment.incrementWarningCnt();
@@ -70,7 +70,7 @@ public class ReportService extends AbstractPostingService {
         //신고 횟수가 기준을 넘은 경우 --> Hide 처리
         //추후 새로운 방안으로 변경 예정
         if(cnt > guideValue){
-            comment.changeHideState(false);
+            comment.changeHideState(true);
         }
 
         //결과를 반영한 entity 저장
@@ -93,7 +93,7 @@ public class ReportService extends AbstractPostingService {
         reportPostingRepository.save(build);
 
         //기준 : 몇 개의 신고가 접수되면, 관리자 처리 전에 숨김처리를 할지
-        int guideValue = 100;
+        int guideValue = 5;
 
         //신고 횟수를 하나 추가
         post.incrementReportCnt();
@@ -104,7 +104,7 @@ public class ReportService extends AbstractPostingService {
         //신고 횟수가 기준을 넘은 경우 --> Hide 처리
         //추후 새로운 방안으로 변경 예정
         if(cnt > guideValue){
-            post.changeHideState(false);
+            post.changeHideState(true);
         }
 
         //결과를 반영한 entity 저장
