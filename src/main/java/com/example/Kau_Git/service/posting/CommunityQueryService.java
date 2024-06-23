@@ -17,6 +17,7 @@ public class CommunityQueryService {
     private final PostingRepository postingRepository;
     private final CommentRepository commentRepository;
 
+    //세부 게시물 내용 보여주기
     public CommunityResponseDto.PostingDto showPosting(Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);
         CommunityResponseDto.PostingDto build = CommunityResponseDto.PostingDto.builder()
@@ -31,7 +32,7 @@ public class CommunityQueryService {
         return build;
 
     }
-
+    //Community 게시물 내용 보여주기
     public CommunityResponseDto.ListDto showList() {
 
         List<Posting> postings = postingRepository.findAllByClassification('C');
@@ -53,6 +54,7 @@ public class CommunityQueryService {
         return build;
     }
 
+    //게시물 내용 요약 - 20자 이내로
     public String makeDescription(String content){
         // 만약 content의 길이가 20자 이상이라면 처음부터 20자까지를, 그렇지 않다면 content 전체를 사용
         String description = content.length() > 20 ? content.substring(0, 20) : content;

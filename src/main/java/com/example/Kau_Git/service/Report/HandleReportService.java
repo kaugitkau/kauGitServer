@@ -3,9 +3,7 @@ package com.example.Kau_Git.service.Report;
 import com.example.Kau_Git.entity.*;
 import com.example.Kau_Git.repository.*;
 import jakarta.transaction.Transactional;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -106,6 +104,8 @@ public class HandleReportService {
 
     @Getter
     @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class BannedContentDto{
         //게시물의 Id
         Long contentId;
