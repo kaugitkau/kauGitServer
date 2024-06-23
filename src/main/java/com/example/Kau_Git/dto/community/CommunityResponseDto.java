@@ -15,6 +15,7 @@ public class CommunityResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class PostingDto {
+        private Long postingId;
         private Integer viewCnt; //추천수
         private Integer recommendedCnt; //좋아요 수
         private LocalDateTime createdAt; //생성날짜

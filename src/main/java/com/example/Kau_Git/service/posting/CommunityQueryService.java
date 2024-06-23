@@ -20,6 +20,7 @@ public class CommunityQueryService {
     public CommunityResponseDto.PostingDto showPosting(Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);
         CommunityResponseDto.PostingDto build = CommunityResponseDto.PostingDto.builder()
+                .postingId(byPostId.getPostingId())
                 .title(byPostId.getTitle())
                 .content(byPostId.getContent())
                 .region(byPostId.getWriter().getAddress())
