@@ -43,8 +43,10 @@ public class Posting extends BaseEntity {
     private Integer reportCnt;
 
 
+    @Column(columnDefinition = "integer default 0")
     private Integer viewCnt;
 
+    @Column(columnDefinition = "integer default 0")
     private Integer recommendedCnt=0;
 
     @Column(columnDefinition = "integer default 0")
