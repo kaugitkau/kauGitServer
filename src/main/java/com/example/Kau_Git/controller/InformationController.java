@@ -2,13 +2,16 @@ package com.example.Kau_Git.controller;
 
 import com.example.Kau_Git.Oauth.Login;
 import com.example.Kau_Git.Oauth.SessionUser;
+import com.example.Kau_Git.dto.UserUpdateRequestDto;
 import com.example.Kau_Git.service.MyPageService;
 import com.example.Kau_Git.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class InformationController { // 안쓰임
 
     private final MyPageService myPageService;
+
 
     @GetMapping("/MyInformation")
     public String MyInfo(@Login SessionUser user, Model model){
@@ -40,17 +44,13 @@ public class InformationController { // 안쓰임
     }
 
     @PostMapping("/MyInformation")
-    public String updateInformation(@Login SessionUser user,
-                                    @RequestParam("address") String address, // 명시적으로 이름 지정 해줘야함. 지금은 4개 다 집어넣어야 바뀌는데 추후 개별수정 넣어야함.
-                                    @RequestParam("religion") String religion,
-                                    @RequestParam("nationality") String nationality,
-                                    @RequestParam("gender") int gender){
-
-        if(user != null){
-            myPageService.SetInformation(user.getEmail(), address, religion, nationality, gender);
-            return "redirect:/MyInformation"; // 정보 업데이트 후, 사용자 정보 페이지로 리다이렉션
+    public ResponseEntity<String> updateInformation(@Login SessionUser user,
+                                                    @RequestBody UserUpdateRequestDto userUpdateRequestDto) {
+        if (user != null) {
+            myPageService.setInformation(user.getEmail(), userUpdateRequestDto);
+            return ResponseEntity.ok("Information updated successfully");
         } else {
-            return "redirect:/login";
+            return ResponseEntity.status(401).body("User not logged in");
         }
     }
 }

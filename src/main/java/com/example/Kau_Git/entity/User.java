@@ -81,11 +81,13 @@ public class User  extends BaseEntity {
     private MyRole role; // 사용자의 권한을 관리할 Enum 클래스
 
     @Builder
-    public User(String id,String name, String email, MyRole role) {
+    public User(String id, String name, String email, MyRole role, Integer gender, Date birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.role = role;
+        this.gender = gender;
+        this.birthDate = birthDate;
     }
 
     public User update(String name) {

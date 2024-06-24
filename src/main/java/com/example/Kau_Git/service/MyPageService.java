@@ -1,6 +1,7 @@
 package com.example.Kau_Git.service;
 
 import com.example.Kau_Git.dto.MyPageDto;
+import com.example.Kau_Git.dto.UserUpdateRequestDto;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.entity.User;
 import com.example.Kau_Git.repository.CommentRepository;
@@ -72,13 +73,10 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
                 .build();
     }
 
-
-
     @Transactional
     public User GetInformation(String email, String name){  // pk기반으로 찾아오고, email과 name을 표시한다.
         //이메일 기반 으로 사용자 찾기
         Optional<User> u1 =userRepository.findByEmail(email); //Optional -> null값일 수 도 있기때문에 감아놓는다.
-
 
         if(u1.isPresent()){
 
@@ -96,24 +94,19 @@ public class MyPageService { // 새로 정보 등록하기, 회원 정보 가져
     }
 
     @Transactional
-    public void SetInformation(String email, String address, String religion, String nationality, int gender){ //
-        Optional<User> u1 =userRepository.findByEmail(email);
+    public void setInformation(String email, UserUpdateRequestDto userUpdateRequestDto) {
+        Optional<User> u1 = userRepository.findByEmail(email);
 
-        if(u1.isPresent()) {
-
+        if (u1.isPresent()) {
             User s1 = u1.get();
-
-            s1.setAddress(address);
-            s1.setGender(gender);
-            s1.setNationality(nationality);
-            s1.setReligion(religion);
-
-
+            s1.setAddress(userUpdateRequestDto.getAddress());
+            s1.setGender(userUpdateRequestDto.getGender());
+            s1.setNickname(userUpdateRequestDto.getNickname());
+            s1.setNationality(userUpdateRequestDto.getNationality());
+            s1.setReligion(userUpdateRequestDto.getReligion());
 
             userRepository.save(s1);
         }
-
-
     }
 
 

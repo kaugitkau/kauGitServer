@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
 import java.util.Map;
 
 @Getter
@@ -23,6 +24,8 @@ public class OAuthAttributes { //사용자 정보 전달
     private String picture;
     private MyRole role;
     private String id;
+    private Integer gender;
+    private Date birthDate;
 
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
@@ -52,6 +55,7 @@ public class OAuthAttributes { //사용자 정보 전달
             return OAuthAttributes.builder()
                     .name((String) response.get("name"))
                     .email((String) response.get("email"))
+                    .gender(convertGender((String) response.get("gender")))
                     .attributes(response)
                     .nameAttributeKey(userNameAttributeName)
                     .build();
@@ -61,6 +65,16 @@ public class OAuthAttributes { //사용자 정보 전달
         }
     }
 
+
+    private static Integer convertGender(String gender) {
+        if ("M".equalsIgnoreCase(gender)) {
+            return 0;
+        } else if ("F".equalsIgnoreCase(gender)) {
+            return 1;
+        } else {
+            return null; // 성별 정보가 없는 경우
+        }
+    }
 
     // User 엔티티 생성 (생성 시점은 처음 가입할 때)
     public User toEntity() {
