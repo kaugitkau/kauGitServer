@@ -23,4 +23,6 @@ public class LikesController {
         likeRequestDto.setUserId(sessionUser.getUserId());
         likesCommandService.checkLikeStatus(likeRequestDto);
     }
+
+
 }
