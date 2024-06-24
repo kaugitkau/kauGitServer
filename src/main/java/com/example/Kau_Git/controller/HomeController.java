@@ -54,7 +54,7 @@ public class HomeController {
     }
      */
 
-    @GetMapping("/login")
+    @GetMapping("/login")//
     public RedirectView getLoginUrl(@RequestParam("provider") String provider, HttpServletResponse response) {
         String clientId = "";
         String redirectUri = "";
