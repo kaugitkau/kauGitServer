@@ -34,9 +34,7 @@ public class PheedController {
     //피드 목록 조회
     @GetMapping("/pheed")
     public PheedResponseDto.ListPheedDto getPheeds() {
-
         return pheedQueryService.getPheeds();
-
     }
 
 }

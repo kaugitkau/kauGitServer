@@ -28,6 +28,7 @@ public class LikesCommandService {
 
     public void checkLikeStatus(LikeRequestDto likeRequestDto) {
         Long userId = likeRequestDto.getUserId();
+
         Long postId = likeRequestDto.getPostId();
 
         Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postId);
@@ -59,8 +60,6 @@ public class LikesCommandService {
         like.getPosting().decrementRecommendedCnt();
 
         likesRepository.delete(like);
-
-
     }
 
     public void decrementLikeCount(Long postingId) {

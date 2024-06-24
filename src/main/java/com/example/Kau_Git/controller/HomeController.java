@@ -19,7 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -35,17 +37,20 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam("provider") String provider) {
-        // provider에 따라 네이버 또는 구글 로그인 페이지로 리다이렉트
-        String redirectUrl = "redirect:/";
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> getLoginUrl(@RequestParam("provider") String provider) {
+        String loginUrl = "";
         if ("naver".equals(provider)) {
-            redirectUrl = "redirect:/oauth2/authorization/naver"; // 네이버 로그인 처리 URL
+            loginUrl = "/oauth2/authorization/naver";
         } else if ("google".equals(provider)) {
-            redirectUrl = "redirect:/oauth2/authorization/google"; // 구글 로그인 처리 URL
+            loginUrl = "/oauth2/authorization/google";
         }
-        return redirectUrl;
-    }
 
+        Map<String, String> response = new HashMap<>();
+        response.put("loginUrl", loginUrl);
+
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/")
     public ResponseEntity<?> home(@Login SessionUser user) {
