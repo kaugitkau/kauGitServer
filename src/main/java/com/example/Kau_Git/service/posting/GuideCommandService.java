@@ -25,6 +25,15 @@ public class GuideCommandService extends AbstractPostingService {
     private final GuideMatchingRepository guideMatchingRepository;
     private final UserRepository userRepository;
 
+    @Transactional(readOnly = true)
+    public boolean checkUserPoints(Long userId, int requiredPoints) {
+        User user = userRepository.findByUserId(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with id: " + userId);
+        }
+        return user.getPoint() >= requiredPoints;
+    }
+
     @Transactional
     public void registGuiding(GuideRequestDto.RegistGuidePostingDto registGuidePostingDto, Long userId) {
         //userRepository에서 작성자를 찾아옴

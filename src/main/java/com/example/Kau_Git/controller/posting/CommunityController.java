@@ -7,6 +7,8 @@ import com.example.Kau_Git.dto.community.CommunityResponseDto;
 import com.example.Kau_Git.service.posting.CommunityCommandService;
 import com.example.Kau_Git.service.posting.CommunityQueryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,32 +17,37 @@ public class CommunityController {
     private final CommunityCommandService communityCommandService;
     private final CommunityQueryService communityQueryService;
 
-
     private final Long testId = 1L;
 
-
-    //커뮤니티 글 등록
     @PostMapping("/community")
-    public void addCommunityPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto,
-                                 @Login SessionUser sessionUser) {
-
-        Long userId = sessionUser.getUserId();
-        communityCommandService.addPosting(userId, addPostingDto);
-
+    public ResponseEntity<?> addCommunityPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto,
+                                              @Login SessionUser sessionUser) {
+        try {
+            Long userId = sessionUser.getUserId();
+            communityCommandService.addPosting(userId, addPostingDto);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("커뮤니티 글 등록 중 오류가 발생했습니다: " + e.getMessage());
+        }
     }
 
-    //커뮤니티 글 상세내용 조회
     @GetMapping("/community/{postingId}")
-    // 컴파일 시에는 debugging enabled가 되어야 스프링이 찾을 수 있다.
-    public CommunityResponseDto.PostingDto showPost(@PathVariable(name = "postingId") Long postingId) {
-
-        return communityQueryService.showPosting(postingId);
+    public ResponseEntity<?> showPost(@PathVariable(name = "postingId") Long postingId) {
+        try {
+            CommunityResponseDto.PostingDto postingDto = communityQueryService.showPosting(postingId);
+            return ResponseEntity.ok(postingDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("커뮤니티 글 조회 중 오류가 발생했습니다: " + e.getMessage());
+        }
     }
 
-    //커뮤니티 글 목록 조회
     @GetMapping("/community/allpost")
-    public CommunityResponseDto.ListDto showAllPost() {
-        return communityQueryService.showList();
+    public ResponseEntity<?> showAllPost() {
+        try {
+            CommunityResponseDto.ListDto listDto = communityQueryService.showList();
+            return ResponseEntity.ok(listDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("커뮤니티 글 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
+        }
     }
-
 }

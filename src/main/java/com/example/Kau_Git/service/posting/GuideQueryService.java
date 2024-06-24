@@ -47,7 +47,7 @@ public class GuideQueryService {
 
     //목록에서 모든 모집글 조회하기
     public GuideResponseDto.ShowAllPostDto showAllPost(){
-        List<Posting> all = postingRepository.findAllByClassification('G');
+        List<Posting> all = postingRepository.findAllByClassification('M');
         List<GuideResponseDto.GuidePreviewDto> guidePreviewDtoList =
         all.stream()
                 .map(a-> GuideResponseDto.GuidePreviewDto.builder()
