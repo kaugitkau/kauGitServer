@@ -10,8 +10,5 @@ public class GuideRequestDto {
         private String title;
         private String content;
 
-
-
-
     }
 }

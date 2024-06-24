@@ -13,6 +13,7 @@ public class CommentRequestDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class AddCommentDto{
+
         private String content;
 
     }

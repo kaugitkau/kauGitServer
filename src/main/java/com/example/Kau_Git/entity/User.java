@@ -105,4 +105,7 @@ public class User  extends BaseEntity {
         this.hasBannedFlag = status;
     }
 
+    public int getPoint() {
+        return userPoint;
+    }
 }

@@ -33,11 +33,12 @@ public class CommentController {
         return commentPreviewDtos;
     }
 
-    //댓글 삭제
+    //댓글 삭제 - 제약조건 때문에 안된다.
     @DeleteMapping("/comment/{commentId}")
     public void deleteComment(@PathVariable Long commentId,
                               @Login SessionUser sessionUser) {
         Long userId = sessionUser.getUserId();
+
         commandService.deleteComment(userId, commentId);
     }
 }
