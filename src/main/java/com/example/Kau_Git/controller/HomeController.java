@@ -54,7 +54,7 @@ public class HomeController {
     }
      */
 
-    @GetMapping("/login")
+    @GetMapping("/login")//
     public RedirectView getLoginUrl(@RequestParam("provider") String provider, HttpServletResponse response) {
         String clientId = "";
         String redirectUri = "";
@@ -63,13 +63,13 @@ public class HomeController {
 
         if ("naver".equals(provider)) {
             clientId = "ud72bzHYNtmwGhKFDjAU";
-            redirectUri = "http://localhost:8080/login/oauth2/code/naver";
+            redirectUri = "http://parkingzone.shop/login/oauth2/code/naver";
             authorizationUri = "https://nid.naver.com/oauth2.0/authorize";
             scopes.add("profile");
             scopes.add("email");
         } else if ("google".equals(provider)) {
             clientId = "8462816831-3lop9fop0m4utavosv1jns6t6g66qnt9.apps.googleusercontent.com";
-            redirectUri = "http://localhost:8080/login/oauth2/code/google";
+            redirectUri = "http://parkingzone.shop/login/oauth2/code/google";
             authorizationUri = "https://accounts.google.com/o/oauth2/auth";
             scopes.add("profile");
             scopes.add("email");
