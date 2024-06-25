@@ -3,6 +3,7 @@ package com.example.Kau_Git.dto.community;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CommunityRequestDto {
 
@@ -10,7 +11,7 @@ public class CommunityRequestDto {
     public static class AddPostingDto{
         private String title; //제목
         private String content;
-        private String hashTag;
+        private List<String> hashtags;
 
 
     }

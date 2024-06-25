@@ -17,7 +17,6 @@ public class CommunityController {
     private final CommunityCommandService communityCommandService;
     private final CommunityQueryService communityQueryService;
 
-    private final Long testId = 1L;
 
     @PostMapping("/community")
     public ResponseEntity<?> addCommunityPost(@RequestBody CommunityRequestDto.AddPostingDto addPostingDto,
