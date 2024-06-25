@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -70,13 +71,19 @@ public class PheedCommandService {
     private void saveHashtag(Posting posting, List<String> hashtags) {
         hashtags.stream()
                 .forEach(tag -> {
-                    Hashtag hashtag = Hashtag.builder()
-                            .word(tag)
-                            .build();
-                    Hashtag save = hashtagRepository.save(hashtag);
+                    Optional<Hashtag> existingHashtag = hashtagRepository.findByWord(tag);
+                    Hashtag hashtag;
+                    if (existingHashtag.isPresent()) {
+                        hashtag = existingHashtag.get();
+                    } else {
+                        hashtag = Hashtag.builder()
+                                .word(tag)
+                                .build();
+                        hashtag = hashtagRepository.save(hashtag);
+                    }
 
-                    PostingHashtag pheedHashtag = new PostingHashtag(posting, save);
-                    postingHashtagRepository.save(pheedHashtag);
+                    PostingHashtag postingHashtag = new PostingHashtag(posting, hashtag);
+                    postingHashtagRepository.save(postingHashtag);
                 });
 
     }

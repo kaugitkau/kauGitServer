@@ -39,6 +39,20 @@ public class LikesCommandService {
         }
     }
 
+    public Boolean isLiked(LikeRequestDto likeRequestDto)
+    {
+        Long userId = likeRequestDto.getUserId();
+
+        Long postId = likeRequestDto.getPostId();
+        Likes like = likesRepository.findByUser_UserIdAndPosting_PostingId(userId, postId);
+        if (like == null) {
+            return Boolean.FALSE;
+        } else {
+            return Boolean.TRUE;
+        }
+
+    }
+
 
     public void likePosting(Long userID, Long postId) {
         Posting byPostId = postingRepository.findByPostingId(postId);

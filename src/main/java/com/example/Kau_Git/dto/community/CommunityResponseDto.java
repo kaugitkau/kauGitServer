@@ -22,7 +22,7 @@ public class CommunityResponseDto {
         private String region; //지역
         private String title; //제목
         private String content; //내용
-        private String hashTag; //게시물의 HashTag
+        private List<String> hashTags; //게시물의 HashTag
 
     }
 
