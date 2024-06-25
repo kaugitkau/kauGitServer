@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Getter
 public class SessionUser implements Serializable {
-    // SessionUser는 인증된 사용자 정보만 필요하므로 아래 필드만 선언
+    // SessionUser는 인증된 사용자 정보만 필요하므로 아래 필드만 선언 , Dto
     private String name;
     private String email;
     private Long userId;
