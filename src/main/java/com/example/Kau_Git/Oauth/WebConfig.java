@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {//
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://172.30.1.52:3000","http://localhost:3000, http:parkingzone.shop") // 리액트 앱의 URL로 변경
+                .allowedOrigins("http://172.30.1.52:3000","http://localhost:3000", "http://parkingzone.shop", "http://parkingzone.shop:3000") // 리액트 앱의 URL로 변경
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowCredentials(true); // 쿠키를 포함하여 요청을 허용
     }
