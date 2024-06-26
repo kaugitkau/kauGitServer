@@ -46,7 +46,7 @@ public class SecurityConfig { // 시큐리티 환경 설정 클래스
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
-                        .defaultSuccessUrl("http://parkingzone.shop:80/", true));
+                        .defaultSuccessUrl("http://parkingzone.shop:3000/", true));
         return http.build();
     }
 
