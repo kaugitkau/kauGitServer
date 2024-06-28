@@ -51,4 +51,12 @@ public class Comment extends BaseEntity {
     public void decrementWarningCnt(){this.warningCnt -= 1;}
     //게시물 보이기 & 숨기기
     public void changeHideState(Boolean setValue){this.isHideFlag = setValue;}
+
+
+//    @PreRemove
+//    private void preRemove() {
+//        if (posting != null) {
+//            this.posting = null;
+//        }
+//    }
 }

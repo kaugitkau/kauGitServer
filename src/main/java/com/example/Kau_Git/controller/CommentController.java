@@ -19,7 +19,7 @@ public class CommentController {
 
     //댓글 등록
     @PostMapping("/comment/{postingId}")
-    public void addComment(@PathVariable Long postingId, @RequestBody CommentRequestDto.AddCommentDto addCommentDto,
+    public void addComment(@PathVariable(name = "postingId") Long postingId, @RequestBody CommentRequestDto.AddCommentDto addCommentDto,
                            @Login SessionUser sessionUser) {
         Long userId = sessionUser.getUserId();
 

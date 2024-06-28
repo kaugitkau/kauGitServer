@@ -23,6 +23,7 @@ public class CommentQueryService {
         List<CommentResponseDto.CommentPreviewDto> collect = commentRepository.findAllByPostingOrderByCreatedAtAsc(byPostId)
                 .stream()
                 .map(c -> CommentResponseDto.CommentPreviewDto.builder()
+                        .commentId(c.getCommentId())
                         .content(c.getContent())
                         .createdDate(c.getCreatedAt())
                         .nickName(c.getWriter().getNickname())

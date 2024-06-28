@@ -11,6 +11,7 @@ public class CommentResponseDto {
     @Getter
     @Builder
     public static class CommentPreviewDto{
+        private Long commentId;
         private String writerId; //작성자 ID
         private LocalDateTime createdDate; //작성 날짜
         private String content; //댓글 내용
