@@ -1,11 +1,13 @@
 package com.example.Kau_Git.service.posting;
 
+import com.example.Kau_Git.apiPayload.code.status.ErrorStatus;
 import com.example.Kau_Git.dto.community.CommunityResponseDto;
 import com.example.Kau_Git.entity.Hashtag;
 import com.example.Kau_Git.entity.Posting;
 import com.example.Kau_Git.repository.CommentRepository;
 import com.example.Kau_Git.repository.PostingHashtagRepository;
 import com.example.Kau_Git.repository.PostingRepository;
+import com.nimbusds.oauth2.sdk.GeneralException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +39,18 @@ public class CommunityQueryService {
 
     }
     //Community 게시물 내용 보여주기
-    public CommunityResponseDto.ListDto showList() {
+    public CommunityResponseDto.ListDto showList(String sortType) throws GeneralException {
 
-        List<Posting> postings = postingRepository.findAllByClassification('C');
+        List<Posting> postings;
+        if (sortType == "popularity") {
+            postings = postingRepository.findAllByClassification('C');
+        }
+        else if (sortType == "latest") {
+            postings = postingRepository.findByClassificationOrderByCreatedAtDesc('C');
+        }
+        else{
+            throw new GeneralException(ErrorStatus._BAD_REQUEST.getMessage());
+        }
         List<CommunityResponseDto.PreviewDto> collect = postings.stream()
                 .map(posting ->
                         CommunityResponseDto.PreviewDto.builder()
@@ -57,6 +68,7 @@ public class CommunityQueryService {
                 .build();
         return build;
     }
+
 
     //게시물 내용 요약 - 20자 이내로
     public String makeDescription(String content){

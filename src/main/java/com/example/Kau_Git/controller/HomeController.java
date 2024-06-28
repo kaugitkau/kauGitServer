@@ -113,6 +113,16 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @GetMapping("/login-status")
+    public String loginStatus() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated() && !(authentication.getPrincipal() instanceof String)) {
+            return "Logged In";
+        } else {
+            return "Not Logged In";
+        }
+    }
+
     @GetMapping("/topmentors")
     @ResponseBody
     public TopService.ListTopMentorsDto getTopMentors(){
