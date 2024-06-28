@@ -39,57 +39,6 @@ public class HomeController {
         return "index";
     }
 
-//    @GetMapping("/login")
-//    @ResponseBody
-//    public ResponseEntity<Map<String, String>> getLoginUrl(@RequestParam("provider") String provider) {
-//        String loginUrl = "";
-//        if ("naver".equals(provider)) {
-//            loginUrl = "/oauth2/authorization/naver";
-//        } else if ("google".equals(provider)) {
-//            loginUrl = "/oauth2/authorization/google";
-//        }
-//        Map<String, String> response = new HashMap<>();
-//        response.put("loginUrl", loginUrl);
-//        return ResponseEntity.ok(response);
-//    }
-
-
-//    @GetMapping("/login")//
-//    public RedirectView getLoginUrl(@RequestParam("provider") String provider, HttpServletResponse response) {
-//        String clientId = "";
-//        String redirectUri = "";
-//        String authorizationUri = "";
-//        Set<String> scopes = new HashSet<>();
-//
-//        if ("naver".equals(provider)) {
-//            clientId = "ud72bzHYNtmwGhKFDjAU";
-//            redirectUri = "/login/oauth2/code/naver";
-//            authorizationUri = "https://nid.naver.com/oauth2.0/authorize";
-//            scopes.add("profile");
-//            scopes.add("email");
-//        } else if ("google".equals(provider)) {
-//            clientId = "8462816831-3lop9fop0m4utavosv1jns6t6g66qnt9.apps.googleusercontent.com";
-//            redirectUri = "/login/oauth2/code/google";
-//            authorizationUri = "http://accounts.google.com/o/oauth2/auth";
-//            scopes.add("profile");
-//            scopes.add("email");
-//        }
-//
-//        OAuth2AuthorizationRequest authorizationRequest = OAuth2AuthorizationRequestCreator.createAuthorizationRequest(clientId, redirectUri, authorizationUri, scopes);
-//        CookieUtils.addCookie(response, "oauth2_auth_request", CookieUtils.serialize(authorizationRequest), 180);
-//        String authorizationRequestUri = authorizationRequest.getAuthorizationRequestUri();
-//        return new RedirectView(authorizationRequestUri);
-//    }
-//    @GetMapping("/login/oauth2/code/{provider}")
-//    public String handleOAuth2Callback(@PathVariable("provider") String provider, @RequestParam("code") String code, @RequestParam("state") String state, HttpServletRequest request, HttpServletResponse response) {
-//        Optional<Cookie> cookieOptional = CookieUtils.getCookie(request, "oauth2_auth_request");
-//        if (cookieOptional.isPresent()) {
-//            OAuth2AuthorizationRequest authorizationRequest = CookieUtils.deserialize(cookieOptional.get(), OAuth2AuthorizationRequest.class);
-//            // 인증 요청을 처리하고 사용자 정보를 가져오는 로직
-//            CookieUtils.deleteCookie(request, response, "oauth2_auth_request");
-//        }
-//        return "redirect:/";
-//    }
 
     @GetMapping("/")
     public ResponseEntity<?> home(@Login SessionUser user) {
@@ -123,6 +72,7 @@ public class HomeController {
         }
     }
 
+    //멘토링(버디에서) 평점이 높은 유저들을 추천
     @GetMapping("/topmentors")
     @ResponseBody
     public TopService.ListTopMentorsDto getTopMentors(){
@@ -132,6 +82,7 @@ public class HomeController {
 
     }
 
+    //쉐어링평점이 높은 유저들을 추천
     @GetMapping("/tophousings")
     @ResponseBody
     public TopService.ListTopHousingsDto getTopHousings(){
@@ -139,6 +90,7 @@ public class HomeController {
         return topHousings;
     }
 
+    //인기있는 포스팅을 조회
     @GetMapping("/hotpostings")
     @ResponseBody
     public TopService.ListHotCommunityPostingsDto getHotPostings(){
