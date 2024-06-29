@@ -64,4 +64,15 @@ public class CommunityController {
         }
     }
 
+    // 최신순으로 조회
+    @GetMapping("/community/allpost")
+    public ResponseEntity<?> showAllPostDefault() {
+        try {
+            CommunityResponseDto.ListDto listDto = communityQueryService.showList("latest");
+            return ResponseEntity.ok(listDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("커뮤니티 글 목록 조회 중 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
 }
