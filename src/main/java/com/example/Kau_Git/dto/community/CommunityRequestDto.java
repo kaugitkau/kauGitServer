@@ -11,8 +11,6 @@ public class CommunityRequestDto {
         private String title; //제목
         private String content;
         private String hashTag;
-
-
     }
 
 

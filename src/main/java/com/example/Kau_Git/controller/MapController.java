@@ -39,7 +39,7 @@ public class MapController {
         this.ts = ts;
     }
 
-    @GetMapping("/map")
+    @GetMapping("/map")//앙아아앙아아아
     public String map(){
         return "map";
     }

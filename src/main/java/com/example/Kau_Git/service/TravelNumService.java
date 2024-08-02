@@ -31,7 +31,7 @@ public class TravelNumService {
 
     public Map<String, Long> getInfo() {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(BASE_URL)
-                .queryParam("numOfRows", 5500) // 총 몇개가 존재하는가?
+                .queryParam("numOfRows", 5500)
                 .queryParam("pageNo", 1)
                 .queryParam("MobileOS", "etc")
                 .queryParam("MobileApp", "hanzoom")

@@ -26,6 +26,7 @@ public class CommunityCommandService extends AbstractPostingService {
                 .classification('C') //분류 설정
                 .content(addPostingDto.getContent()) //내용 가져오기
                 .title(addPostingDto.getTitle()) //제목 설정
+                //.hashTag(addPostingDto.getHashTag())
                 .build();//Entity 생성
         //DB에 저장
         postingRepository.save(build);

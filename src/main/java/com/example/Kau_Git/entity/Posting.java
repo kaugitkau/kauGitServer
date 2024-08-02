@@ -42,6 +42,10 @@ public class Posting extends BaseEntity {
     @Column(name = "REPORT_CNT")
     private Integer reportCnt;
 
+    /*
+    @Column(name = "HASHTAG")
+    private String hashtag;
+     */
 
     @Column(columnDefinition = "integer default 0")
     private Integer viewCnt;

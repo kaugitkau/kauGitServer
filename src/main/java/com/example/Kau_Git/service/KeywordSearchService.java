@@ -106,4 +106,5 @@ public class KeywordSearchService {
     public Map<String, String> getAreaInfo(int areaCode) {
         return as.getInfo(areaCode);
     }
+
 }
